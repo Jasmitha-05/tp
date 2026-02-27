@@ -23,5 +23,5 @@ src/test/data/sandbox/
 docs/_site/
 docs/_markbind/logs/
 
-# Ignore VS Code settings
+# VS Code files
 .vscode/
