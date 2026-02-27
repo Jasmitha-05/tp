@@ -32,10 +32,10 @@ You can reach us at the email `e1398129@u.nus.edu`
 
 ### Enzo Chung
 
-`<img src="images/enzochung
-.png" width="200px">`
+<img src="images/enzochung.png" width="200px">
 
-[[github](http://github.com/enzochung)] [[portfolio](team/enzochung.md)]
+[[github](http://github.com/enzochung)]
+[[portfolio](team/enzochung.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -45,7 +45,7 @@ You can reach us at the email `e1398129@u.nus.edu`
 <img src="images/kyicode.png" width="200px">
 
 [[github](https://github.com/KyiCode)]
-[[portfolio](team/kyicode)]
+[[portfolio](team/kyicode.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
