@@ -6,17 +6,17 @@ layout: default.md
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e1398129@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Viswanathan Jasmitha
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasmitha-05.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://ay2526s2-cs2103t-f10-4.github.io/tp)]
+[[github](https://github.com/jasmitha-05)]
+[[portfolio](team/jasmitha.md)]
 
 * Role: Project Advisor
 
