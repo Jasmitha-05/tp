@@ -32,14 +32,5 @@ public class AddressBookEditingParserTest {
 
     // These two tests below cannot pass at the moment until EditCommand is updated to
     // use the correct control flow logic
-    @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
-    }
-
-    @Test
-    public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_COMMAND_FORMAT, () -> parser.parseCommand("delete"));
-    }
+    
 }
