@@ -20,6 +20,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OverwriteCommand;
 import seedu.address.logic.commands.StatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DuplicateApplicationStore;
 
 /**
  * Parses user input.

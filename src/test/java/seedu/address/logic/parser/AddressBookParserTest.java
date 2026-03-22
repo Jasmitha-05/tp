@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OverwriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.DuplicateApplicationStore;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
