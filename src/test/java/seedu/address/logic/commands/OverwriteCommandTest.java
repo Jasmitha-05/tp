@@ -28,7 +28,7 @@ public class OverwriteCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-         alice = new PersonBuilder(ALICE).build();
+        alice = new PersonBuilder(ALICE).build();
 
         if (!model.hasPerson(alice)) {
             model.addPerson(alice);
