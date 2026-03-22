@@ -103,5 +103,12 @@ public class AddressBookParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+
+        if (!(command instanceof OverwriteCommand)) {
+            if (DuplicateApplicationStore.hasLastDuplicateApplication()) {
+                DuplicateApplicationStore.clear();
+            }
+        }
+        return command;
     }
 }
