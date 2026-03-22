@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.DuplicateApplicationStore;
 
 /**
  * Adds a person to the address book.
@@ -59,10 +60,12 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
+            DuplicateApplicationStore.setLastDuplicateApplication(this);
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
+        DuplicateApplicationStore.clear();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
