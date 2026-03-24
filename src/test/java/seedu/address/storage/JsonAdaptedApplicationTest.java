@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedApplication.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BENSON_WITH_UPCOMING_INTERVIEW;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class JsonAdaptedApplicationTest {
     private static final String INVALID_DATE = "2025-02-31";
     private static final String INVALID_ROLE = "";
     private static final String INVALID_STATUS = " ";
+    private static final String INVALID_UPCOMING_NAME = "";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -37,6 +39,10 @@ public class JsonAdaptedApplicationTest {
     private static final String VALID_DATE = BENSON.getDate().value;
     private static final String VALID_ROLE = BENSON.getRole().value;
     private static final String VALID_STATUS = BENSON.getStatus().value;
+
+    private static final String VALID_EVENT_NAME = BENSON.getDate().value;
+    private static final String VALID_EVENT_DATE = BENSON.getDate().value;
+
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -161,6 +167,46 @@ public class JsonAdaptedApplicationTest {
         JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, VALID_ROLE, null, null, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    //for upcoming class
+    @Test
+    public void toModelType_validPersonWithUpcomingDetails_returnsPersonWithUpcoming() throws Exception {
+        JsonAdaptedApplication person = new JsonAdaptedApplication(BENSON_WITH_UPCOMING_INTERVIEW);
+        assertEquals(BENSON_WITH_UPCOMING_INTERVIEW, person.toModelType());
+    }
+
+
+    @Test
+    public void toModelType_nullUpcomingEventName_throwsIllegalValueException() {
+        JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS, VALID_EVENT_NAME, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidUpcomingEventName_throwsIllegalValueException() {
+        JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS, INVALID_UPCOMING_NAME, VALID_EVENT_DATE);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullUpcomingEventDate_throwsIllegalValueException() {
+        JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS, null, VALID_EVENT_DATE);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidUpcomingEventDate_throwsIllegalValueException() {
+        JsonAdaptedApplication person = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_DATE, null, VALID_STATUS, VALID_EVENT_NAME, INVALID_DATE);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }

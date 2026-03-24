@@ -5,14 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Application;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
-import seedu.address.model.person.Status;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDate(person.getDate());
         descriptor.setRole(person.getRole());
         descriptor.setStatus(person.getStatus());
+        descriptor.setUpcoming(person.getUpcoming());
     }
 
     /**
@@ -111,6 +105,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    public EditPersonDescriptorBuilder withUpcoming(String upcomingName, String upcomingDate) {
+        descriptor.setUpcoming(new Upcoming(upcomingName, upcomingDate));
         return this;
     }
 
