@@ -10,14 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Application;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
-import seedu.address.model.person.Status;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +27,9 @@ class JsonAdaptedApplication {
     private final String status;
     private final String role;
     private final String date;
+//    private final String upcomingEvent;
+//    private final String upcomingDate;
+//    private Boolean hasUpcoming;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,7 +41,10 @@ class JsonAdaptedApplication {
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                   @JsonProperty("date") String date,
                                   @JsonProperty("role") String role,
-                                  @JsonProperty("status") String status) {
+                                  @JsonProperty("status") String status)
+//                                  @JsonProperty("upcomingEvent") String upcomingEvent,
+//                                  @JsonProperty("upcomingDate") String upcomingDate)
+{
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +55,9 @@ class JsonAdaptedApplication {
         this.date = date;
         this.role = role;
         this.status = status;
+//        this.hasUpcoming = false;
+//        this.upcomingEvent = upcomingEvent;
+//        this.upcomingDate = upcomingDate;
     }
 
     /**
@@ -72,6 +74,9 @@ class JsonAdaptedApplication {
         date = source.getDate().value;
         status = source.getStatus().value;
         role = source.getRole().value;
+//        hasUpcoming = source.hasUpcoming();
+//        upcomingEvent = source.hasUpcoming() ? source.getUpcoming().getEventName() : null;
+//        upcomingDate = source.hasUpcoming() ? source.getUpcoming().getEventDate().value : null;
     }
 
     /**
@@ -142,6 +147,20 @@ class JsonAdaptedApplication {
         final Role modelRole = new Role(role);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+//
+//        if (upcomingEvent == null || upcomingDate == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Upcoming.class.getSimpleName()));
+//        }
+//        if (!Date.isValidDate(upcomingDate)) {
+//            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+//        }
+//        final Upcoming modelUpcoming = new Upcoming(upcomingEvent, upcomingDate);
+//
+//        if (hasUpcoming) {
+//            return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+//                    modelDate, modelRole, modelStatus, modelUpcoming);
+//        }
+
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelDate, modelRole, modelStatus);
     }

@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-
 /**
  * Event class to represent upcoming tasks of an application.
  */

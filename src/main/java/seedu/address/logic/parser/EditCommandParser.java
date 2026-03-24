@@ -9,11 +9,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UPCOMING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UPCOMING_DATE;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -36,10 +39,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS);
+                PREFIX_TAG, PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS);
+                PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -64,6 +67,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editPersonDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
+        if (argMultimap.getValue(PREFIX_UPCOMING).isPresent()
+                && argMultimap.getValue(PREFIX_UPCOMING_DATE).isPresent()) {
+            String upcomingEventString = argMultimap.getValue(PREFIX_UPCOMING).get();
+            String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
+            editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE )) {
+            String upcomingEventString = argMultimap.getValue(PREFIX_UPCOMING).get();
+            String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
+            editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -88,6 +103,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

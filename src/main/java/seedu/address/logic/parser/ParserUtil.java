@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
+import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -170,6 +171,18 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    public static Upcoming parseUpcoming(String upcomingEventName, String upcomingEventDate) throws ParseException {
+        requireNonNull(upcomingEventName);
+        requireNonNull(upcomingEventDate);
+        String trimmedEventName = upcomingEventName.trim();
+        String trimmedEventDate = upcomingEventDate.trim();
+
+        if (!Date.isValidDate(trimmedEventDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Upcoming(trimmedEventName, trimmedEventDate);
     }
 
 

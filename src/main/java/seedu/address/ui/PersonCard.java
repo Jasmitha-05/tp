@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Application;
+import seedu.address.model.person.Upcoming;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -46,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     private Label date;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label upcoming;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,6 +64,17 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         status.setText(person.getStatus().value);
+        if (person.hasUpcoming()) {
+            Upcoming u = person.getUpcoming();
+            this.upcoming.setVisible(true);
+            String text = u.getEventName();
+            text += " - " + u.getEventDate().value;
+
+            this.upcoming.setText(text);
+        } else {
+            this.upcoming.setVisible(false);
+        }
+
         person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                                         .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

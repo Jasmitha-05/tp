@@ -30,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
+import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -105,10 +106,10 @@ public class EditCommand extends Command {
         Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
-        //Upcoming updateUpcoming = editPersonDescriptor.getUpcoming().orElse(personToEdit.getStatus());
+        Upcoming updateUpcoming = editPersonDescriptor.getUpcoming().orElse(personToEdit.getUpcoming());
 
         return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedDate, updatedRole, updatedStatus);
+                updatedTags, updatedDate, updatedRole, updatedStatus, updateUpcoming);
     }
 
     @Override
@@ -146,6 +147,7 @@ public class EditCommand extends Command {
         private Role role;
         private Date date;
         private Status status;
+        private Upcoming upcoming;
 
         public EditPersonDescriptor() {}
 
@@ -162,13 +164,14 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setStatus(toCopy.status);
             setDate(toCopy.date);
+            setUpcoming(toCopy.upcoming);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, status, role, date);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, status, role, date, upcoming);
         }
 
         public void setName(Name name) {
@@ -242,6 +245,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setUpcoming(Upcoming upcoming) {
+            this.upcoming = upcoming;
+        }
+
+        public Optional<Upcoming> getUpcoming() {
+            return Optional.ofNullable(upcoming);
         }
 
         @Override

@@ -98,6 +98,10 @@ public class Application {
         return upcoming;
     }
 
+    public boolean hasUpcoming() {
+        return !(upcoming == null);
+    }
+
     public boolean getEditingStatus() {
         return isBeingEdited;
     }
