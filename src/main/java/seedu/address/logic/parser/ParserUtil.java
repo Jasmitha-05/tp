@@ -14,9 +14,9 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
-import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -174,21 +174,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String upcomingEventName and upcomingEventDate} into a {@code Upcoming}.
+     * Parses a {@code String reminderReminderName and reminderReminderDate} into a {@code reminder}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code upcomingEventName and upcomingEventDate} is invalid.
+     * @throws ParseException if the given {@code reminderReminderName and reminderReminderDate} is invalid.
      */
-    public static Upcoming parseUpcoming(String upcomingEventName, String upcomingEventDate) throws ParseException {
-        requireNonNull(upcomingEventName);
-        requireNonNull(upcomingEventDate);
-        String trimmedEventName = upcomingEventName.trim();
-        String trimmedEventDate = upcomingEventDate.trim();
+    public static Reminder parseReminder(String reminderReminderName, String reminderReminderDate)
+            throws ParseException {
+        requireNonNull(reminderReminderName);
+        requireNonNull(reminderReminderDate);
+        String trimmedReminderName = reminderReminderName.trim();
+        String trimmedReminderDate = reminderReminderDate.trim();
 
-        if (!Date.isValidDate(trimmedEventDate)) {
+        if (!Date.isValidDate(trimmedReminderDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Upcoming(trimmedEventName, trimmedEventDate);
+        return new Reminder(trimmedReminderName, trimmedReminderDate);
     }
 
 

@@ -24,7 +24,7 @@ public class Application {
     private final Date date;
     private final Address address;
     private final Status status;
-    private final Upcoming upcoming;
+    private final Reminder reminder;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -46,14 +46,14 @@ public class Application {
         this.tags.addAll(tags);
         this.address = address;
         this.status = status;
-        this.upcoming = null;
+        this.reminder = null;
     }
 
     /**
      * Every field must be present and not null.
      */
     public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                       Date date, Role role, Status status, Upcoming upcoming) {
+                       Date date, Role role, Status status, Reminder reminder) {
         requireAllNonNull(name, phone, email, role, tags, status, date, address);
         this.name = name;
         this.phone = phone;
@@ -63,7 +63,7 @@ public class Application {
         this.tags.addAll(tags);
         this.address = address;
         this.status = status;
-        this.upcoming = upcoming;
+        this.reminder = reminder;
     }
 
     public Name getName() {
@@ -94,12 +94,12 @@ public class Application {
         return status;
     }
 
-    public Upcoming getUpcoming() {
-        return upcoming;
+    public Reminder getUpcoming() {
+        return reminder;
     }
 
     public boolean hasUpcoming() {
-        return !(upcoming == null);
+        return !(reminder == null);
     }
 
     public boolean getEditingStatus() {
@@ -181,8 +181,8 @@ public class Application {
                 .add("address", address)
                 .add("status", status);
 
-        if (upcoming != null) {
-            sb.add("event" , upcoming);
+        if (reminder != null) {
+            sb.add("event" , reminder);
         }
         return sb.toString();
     }

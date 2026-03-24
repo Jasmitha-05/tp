@@ -28,9 +28,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.IsBeingEditedPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
-import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,10 +106,10 @@ public class EditCommand extends Command {
         Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
-        Upcoming updateUpcoming = editPersonDescriptor.getUpcoming().orElse(personToEdit.getUpcoming());
+        Reminder updateReminder = editPersonDescriptor.getUpcoming().orElse(personToEdit.getUpcoming());
 
         return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedDate, updatedRole, updatedStatus, updateUpcoming);
+                updatedTags, updatedDate, updatedRole, updatedStatus, updateReminder);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class EditCommand extends Command {
         private Role role;
         private Date date;
         private Status status;
-        private Upcoming upcoming;
+        private Reminder reminder;
 
         public EditPersonDescriptor() {}
 
@@ -164,14 +164,14 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setStatus(toCopy.status);
             setDate(toCopy.date);
-            setUpcoming(toCopy.upcoming);
+            setReminder(toCopy.reminder);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, status, role, date, upcoming);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, status, role, date, reminder);
         }
 
         public void setName(Name name) {
@@ -247,12 +247,12 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setUpcoming(Upcoming upcoming) {
-            this.upcoming = upcoming;
+        public void setReminder(Reminder reminder) {
+            this.reminder = reminder;
         }
 
-        public Optional<Upcoming> getUpcoming() {
-            return Optional.ofNullable(upcoming);
+        public Optional<Reminder> getUpcoming() {
+            return Optional.ofNullable(reminder);
         }
 
         @Override

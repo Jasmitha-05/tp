@@ -16,9 +16,9 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Status;
-import seedu.address.model.person.Upcoming;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -85,8 +85,8 @@ class JsonAdaptedApplication {
         role = source.getRole().value;
 
         hasUpcoming = source.hasUpcoming();
-        upcomingEvent = hasUpcoming ? source.getUpcoming().getEventName() : null;
-        upcomingDate = hasUpcoming ? source.getUpcoming().getEventDate().value : null;
+        upcomingEvent = hasUpcoming ? source.getUpcoming().getReminderName() : null;
+        upcomingDate = hasUpcoming ? source.getUpcoming().getReminderDate().value : null;
     }
 
     /**
@@ -161,17 +161,17 @@ class JsonAdaptedApplication {
         if (hasUpcoming) {
             if (upcomingEvent == null || upcomingDate == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        Upcoming.class.getSimpleName()));
+                        Reminder.class.getSimpleName()));
             }
 
             if (!Date.isValidDate(upcomingDate)) {
                 throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
             }
 
-            final Upcoming modelUpcoming = new Upcoming(upcomingEvent, upcomingDate);
+            final Reminder modelReminder = new Reminder(upcomingEvent, upcomingDate);
 
             return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelDate, modelRole, modelStatus, modelUpcoming);
+                    modelDate, modelRole, modelStatus, modelReminder);
         }
 
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,

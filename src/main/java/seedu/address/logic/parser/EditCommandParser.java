@@ -6,11 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UPCOMING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UPCOMING_DATE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -39,10 +39,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE);
+                PREFIX_TAG, PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_REMINDER, PREFIX_REMINDER_DATE);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE);
+                PREFIX_DATE, PREFIX_ROLE, PREFIX_STATUS, PREFIX_REMINDER, PREFIX_REMINDER_DATE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -67,16 +67,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editPersonDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        if (argMultimap.getValue(PREFIX_UPCOMING).isPresent()
-                && argMultimap.getValue(PREFIX_UPCOMING_DATE).isPresent()) {
-            String upcomingEventString = argMultimap.getValue(PREFIX_UPCOMING).get();
-            String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
-            editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));
+        if (argMultimap.getValue(PREFIX_REMINDER).isPresent()
+                && argMultimap.getValue(PREFIX_REMINDER_DATE).isPresent()) {
+            String remminderReminderString = argMultimap.getValue(PREFIX_REMINDER).get();
+            String reminderDateString = argMultimap.getValue(PREFIX_REMINDER_DATE).get();
+            editPersonDescriptor.setReminder(ParserUtil.parseReminder(remminderReminderString, reminderDateString));
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_UPCOMING, PREFIX_UPCOMING_DATE)) {
-            String upcomingEventString = argMultimap.getValue(PREFIX_UPCOMING).get();
-            String upcomingDateString = argMultimap.getValue(PREFIX_UPCOMING_DATE).get();
-            editPersonDescriptor.setUpcoming(ParserUtil.parseUpcoming(upcomingEventString, upcomingDateString));
+        if (arePrefixesPresent(argMultimap, PREFIX_REMINDER, PREFIX_REMINDER_DATE)) {
+            String remminderReminderString = argMultimap.getValue(PREFIX_REMINDER).get();
+            String reminderDateString = argMultimap.getValue(PREFIX_REMINDER_DATE).get();
+            editPersonDescriptor.setReminder(ParserUtil.parseReminder(remminderReminderString, reminderDateString));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
