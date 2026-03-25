@@ -26,6 +26,10 @@ public class UpcomingCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
         }
         long daysOffset = Long.parseLong(trimmedArgs);
+        if (daysOffset < 0 || daysOffset > 9) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UpcomingCommand.MESSAGE_DAYS_OUT_OF_RANGE));
+        }
         Date date = new Date(LocalDate.now().plusDays(daysOffset));
         int days = (int) daysOffset;
 

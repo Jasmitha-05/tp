@@ -20,6 +20,7 @@ public class UpcomingCommand extends Command {
             + "Example: " + COMMAND_WORD_WITH_SLASH + " 9";
     public static final String MESSAGE_NO_MATCHES = "No upcoming applications in %d days";
     public static final String MESSAGE_MATCHES_FOUND = "Found %d matching application(s)";
+    public static final String MESSAGE_DAYS_OUT_OF_RANGE = "Days parameter must be between 0 and 9 inclusive.";
 
     private final int daysOffset;
     private final ReminderWithinOffsetPredicate predicate;
@@ -34,6 +35,7 @@ public class UpcomingCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         int matchCount = model.getFilteredPersonList().size();
+        model.setReminderOffset(daysOffset);
         if (matchCount == 0) {
             return new CommandResult(String.format(MESSAGE_NO_MATCHES, daysOffset));
         }
