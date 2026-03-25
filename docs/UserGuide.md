@@ -173,6 +173,58 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li<br>`
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering applications: `/filter`
+
+Filters applications by company, applied date, status, or tag.
+
+Format:
+* `/filter /company /KEYWORD`
+* `/filter /applied /YYYY-MM-DD`
+* `/filter /status /STATUS`
+* `/filter /tag /TAG`
+
+Notes:
+* Filter matching is case-insensitive.
+* Leading and trailing spaces are ignored.
+* Internal spacing still matters.
+* Applied dates must use `YYYY-MM-DD`.
+
+Examples:
+* `/filter /company /Google`
+* `/filter /applied /2025-11-11`
+* `/filter /status /Applied`
+* `/filter /tag /java`
+
+### Creating a new folder : `folder`
+
+Creates a new empty address book saved under `data/<FOLDER_NAME>.json` and switches to it.
+
+Format: `folder FOLDER_NAME`
+
+* `FOLDER_NAME` must be a valid filename (no spaces or special characters).
+* A new empty address book is created at `data/<FOLDER_NAME>.json`.
+* Any existing data in the current folder is unaffected.
+
+Examples:
+
+* `folder Y1S2` creates a new empty address book at `data/Y1S2.json` and switches to it.
+* `folder Internships2025` creates a new address book for internship applications.
+
+### Switching to an existing folder : `toggle`
+
+Switches the active address book to an existing folder (JSON file) at `data/<FOLDER_NAME>.json`.
+
+Format: `toggle FOLDER_NAME`
+
+* `FOLDER_NAME` must correspond to an existing file at `data/<FOLDER_NAME>.json`.
+* All previously saved data in that folder will be loaded.
+* Use `folder` instead if you want to create a new empty address book.
+
+Examples:
+
+* `toggle Y1S2` switches to the address book stored at `data/Y1S2.json`.
+* `toggle Internships2025` loads your saved internship applications from `data/Internships2025.json`.
+
 ### Deleting a person : `delete`
 
 Deletes a specified application from the address book via index or reference via Company name and Role.
@@ -243,13 +295,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                                                             |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...` `<br>` e.g., `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java` |
-| **Clear**  | `clear`                                                                                                                                                                                                                    |
-| **Delete** | `delete INDEX<br>` e.g., `delete 3`                                                                                                                                                                                      |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…<br>` e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                              |
-| **Status** | `status n/COMPANY r/ROLE s/STATUS<br>` e.g., `status n/Tiktok r/Data Analyst s/Rejected`                                                                                                                                 |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]<br>` e.g., `find James Jake`                                                                                                                                                               |
-| **List**   | `list`                                                                                                                                                                                                                     |
-| **Help**   | `help`                                                                                                                                                                                                                     |
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...​` <br> e.g., `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interviewed t/java`
+**Clear**  | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Status** | `status n/COMPANY r/ROLE s/STATUS`<br> e.g., `status n/Tiktok r/Data Analyst s/Rejected`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `/filter /company /KEYWORD` or `/filter /applied /YYYY-MM-DD` or `/filter /status /STATUS` or `/filter /tag /TAG`
+**Folder** | `folder FOLDER_NAME`<br> e.g., `folder Y1S2`
+**Toggle** | `toggle FOLDER_NAME`<br> e.g., `toggle Y1S2`
+**List**   | `list`
+**Help**   | `help`
