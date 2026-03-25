@@ -1,23 +1,21 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
-import seedu.address.commons.util.ToStringBuilder;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.person.Date.isValidDate;
+
+import java.util.Objects;
 
 /**
  * Event class to represent reminder tasks of an application.
  */
 public class Reminder {
+    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]*";
+    public static final String MESSAGE_CONSTRAINTS = "Reminder should be letters, and it should not be blank";
+
     private final String reminderName;
     private final Date reminderDate;
 
-
-    public static final String MESSAGE_CONSTRAINTS = "Reminder should be letters, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]*";
     /**
      * Event with a deadline.
      * @param reminderName event Description.

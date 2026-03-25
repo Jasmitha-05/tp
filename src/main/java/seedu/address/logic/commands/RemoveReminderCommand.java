@@ -1,9 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.ParserMode;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -12,25 +17,22 @@ import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.SameCompanySameRolePredicate;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Command Class to remove reminder of the specified Applciation.
+ */
 public class RemoveReminderCommand extends Command {
 
     public static final String COMMAND_WORD = "rmr";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ":\n"
-            + "Delete via INDEX (Deletes the Application identified by the index number in the displayed person list)\n"
-            + "Delete via Name and Role (Deletes the Application with the exact Name and Role) \n"
+            + "Remove Reminder via INDEX (Remove the reminder of the Application identified "
+            + "by the index number in the displayed person list)\n"
+            + "Remove Reminder via Name and Role (Deletes the reminder of Application with the exact Name and Role) \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + "Parameters: Name (String), Role (String with no numbers) \n"
@@ -88,7 +90,8 @@ public class RemoveReminderCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Application createEditedPerson(Application personToEdit, EditCommand.EditPersonDescriptor editPersonDescriptor) {
+    private static Application createEditedPerson(Application personToEdit,
+                                                  EditCommand.EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -147,7 +150,7 @@ public class RemoveReminderCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemoveReminderCommand )) {
+        if (!(other instanceof RemoveReminderCommand)) {
             return false;
         }
 

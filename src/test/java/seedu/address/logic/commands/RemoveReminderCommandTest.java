@@ -19,16 +19,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Application;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Role;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -57,8 +54,8 @@ public class RemoveReminderCommandTest {
     @Test
     public void execute_validNormalRemoveReminderCommand_success() throws CommandException {
         Application removeReminderTarget = BENSON_WITH_REMINDER_INTERVIEW;
-        RemoveReminderCommand removeReminderCommand
-                = new RemoveReminderCommand(removeReminderTarget.getName(), removeReminderTarget.getRole());
+        RemoveReminderCommand removeReminderCommand =
+                new RemoveReminderCommand(removeReminderTarget.getName(), removeReminderTarget.getRole());
 
         String expectedMessage = String.format(RemoveReminderCommand.MESSAGE_REMOVE_REMINDER_SUCCESS,
                 Messages.format(BENSON)); // <-- use BENSON, not removeReminderTarget
@@ -93,7 +90,8 @@ public class RemoveReminderCommandTest {
 
     @Test
     public void execute_normalremoveReminderNoTarget_throwsCommandException() {
-        RemoveReminderCommand removeReminderCommand = new RemoveReminderCommand(new Name("NonExistentName"), new Role("Engineer"));
+        RemoveReminderCommand removeReminderCommand =
+                new RemoveReminderCommand(new Name("NonExistentName"), new Role("Engineer"));
         assertCommandFailure(removeReminderCommand, model, Messages.MESSAGE_INVALID_APPLICATION_IDENTIFIER);
     }
 
@@ -120,7 +118,8 @@ public class RemoveReminderCommandTest {
         // different person -> returns false
         assertFalse(removeReminderFirstCommandIndex.equals(removeReminderSecondCommandIndex));
 
-        RemoveReminderCommand removeReminderFirstCommandAppCopy = new RemoveReminderCommand(BOB.getName(), BOB.getRole());
+        RemoveReminderCommand removeReminderFirstCommandAppCopy =
+                new RemoveReminderCommand(BOB.getName(), BOB.getRole());
         assertTrue(removeReminderFirstCommandApp.equals(removeReminderFirstCommandApp));
         assertTrue(removeReminderFirstCommandApp.equals(removeReminderFirstCommandAppCopy));
         assertFalse(removeReminderFirstCommandApp.equals(1));
