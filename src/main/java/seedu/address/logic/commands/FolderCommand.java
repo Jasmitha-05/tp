@@ -43,8 +43,12 @@ public class FolderCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof FolderCommand)) return false;
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof FolderCommand)) {
+            return false;
+        }
         FolderCommand o = (FolderCommand) other;
         return createNew == o.createNew && folderName.equals(o.folderName);
     }
