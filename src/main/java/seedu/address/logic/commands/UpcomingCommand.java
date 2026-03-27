@@ -15,12 +15,13 @@ public class UpcomingCommand extends Command {
     public static final String COMMAND_WORD_WITH_SLASH = "/upcoming";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD_WITH_SLASH + ": Sets reminder to display all applications "
-            + "within the specified number of days from the current date, then displays one such notifcation. \n"
+            + "within the specified number of days from the current date, then displays one such notification. \n"
             + "Parameters: [DAYS_OFFSET]...\n"
             + "Example: " + COMMAND_WORD_WITH_SLASH + " 9";
     public static final String MESSAGE_NO_MATCHES = "No upcoming applications in %d days";
     public static final String MESSAGE_MATCHES_FOUND = "There are %d application(s) due in %d days.";
     public static final String MESSAGE_DAYS_OUT_OF_RANGE = "Days parameter must be between 0 and 9 inclusive.";
+    public static final String MESSAGE_INVALID_DAYS = "Days parameter must be an integer between 0 and 9 inclusive.";
 
     private final int daysOffset;
     private final ReminderWithinOffsetPredicate predicate;

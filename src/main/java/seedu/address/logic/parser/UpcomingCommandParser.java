@@ -28,7 +28,17 @@ public class UpcomingCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
         }
-        long daysOffset = Long.parseLong(trimmedArgs);
+
+        int daysOffset;
+
+        try {
+            daysOffset = Integer.parseInt(trimmedArgs);
+
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UpcomingCommand.MESSAGE_INVALID_DAYS));
+        }
+
         if (daysOffset < MIN_OFFSET || daysOffset > MAX_OFFSET) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UpcomingCommand.MESSAGE_DAYS_OUT_OF_RANGE));
