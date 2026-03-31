@@ -17,6 +17,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    public static final String NONESTRING = "None";
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -59,13 +60,48 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         role.setText(" - " + person.getRole().value + "  ");
-        date.setText(person.getDate().toString());
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        status.setText(person.getStatus().value);
-        status.getStyleClass().removeIf(s -> s.startsWith("status-"));
-        status.getStyleClass().add("status-" + person.getStatus().getStyleClass());
+
+
+        if (person.getDate() != null) {
+            date.setText(person.getDate().toString());
+        } else {
+            date.setText(NONESTRING);
+        }
+
+        if (person.getPhone() != null) {
+            phone.setText(person.getPhone().value);
+        } else {
+            phone.setText(NONESTRING);
+        }
+
+        if (person.getAddress() != null) {
+            address.setText(person.getAddress().value);
+        } else {
+            address.setText(NONESTRING);
+        }
+
+        if (person.getEmail() != null) {
+            email.setText(person.getEmail().value);
+        } else {
+            email  .setText(NONESTRING);
+        }
+
+        if (person.getStatus() != null) {
+            status.setText(person.getStatus().value);
+            status.getStyleClass().removeIf(s -> s.startsWith("status-"));
+            status.getStyleClass().add("status-" + person.getStatus().getStyleClass());
+        } else {
+            status.setText(NONESTRING);
+        }
+
+//        date.setText(person.getDate().toString());
+//        phone.setText(person.getPhone().value);
+//        address.setText(person.getAddress().value);
+//        email.setText(person.getEmail().value);
+//        status.setText(person.getStatus().value);
+//
+//        status.getStyleClass().removeIf(s -> s.startsWith("status-"));
+//        status.getStyleClass().add("status-" + person.getStatus().getStyleClass());
 
         if (person.hasReminder()) {
             Reminder u = person.getReminder();

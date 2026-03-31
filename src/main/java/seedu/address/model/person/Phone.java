@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -30,7 +32,7 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return Objects.equals(test, "") || test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = arePrefixesPresent(argMultimap, PREFIX_EMAIL)
                 ? ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get())
                 : null;
-        Address address = arePrefixesPresent(argMultimap, PREFIX_EMAIL)
+        Address address = arePrefixesPresent(argMultimap, PREFIX_ADDRESS)
                 ? ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get())
                 : null;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

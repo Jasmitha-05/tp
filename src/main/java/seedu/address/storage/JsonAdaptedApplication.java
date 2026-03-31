@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.function.Predicate;
+import java.util.function.Function;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +29,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedApplication {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String NONESTRING = "None";
 
     private final String name;
     private final String phone;
@@ -64,7 +67,6 @@ class JsonAdaptedApplication {
         this.role = role;
         this.status = status;
 
-
         this.reminderEvent = reminderEvent;
         this.reminderDate = reminderDate;
     }
@@ -72,17 +74,36 @@ class JsonAdaptedApplication {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
+//    public JsonAdaptedApplication(Application source) {
+//        name = source.getName().fullName;
+//        phone = source.getPhone().value;
+//        email = source.getEmail().value;
+//        address = source.getAddress().value;
+//        tags.addAll(source.getTags().stream()
+//                .map(JsonAdaptedTag::new)
+//                .collect(Collectors.toList()));
+//        date = source.getDate().value;
+//        status = source.getStatus().value;
+//        role = source.getRole().value;
+//
+//        hasReminder = source.hasReminder();
+//        reminderEvent = hasReminder ? source.getReminder().getReminderName() : null;
+//        reminderDate = hasReminder ? source.getReminder().getReminderDate().value : null;
+//    }
+
     public JsonAdaptedApplication(Application source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        name = source.getName() != null ? source.getName().fullName : NONESTRING;
+        phone = source.getPhone() != null ? source.getPhone().value : NONESTRING;
+        email = source.getEmail() != null ? source.getEmail().value : NONESTRING;
+        address = source.getAddress() != null ? source.getAddress().value : NONESTRING;
+
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        date = source.getDate().value;
-        status = source.getStatus().value;
-        role = source.getRole().value;
+
+        date = source.getDate() != null ? source.getDate().value : NONESTRING;
+        status = source.getStatus() != null ? source.getStatus().value : NONESTRING;
+        role = source.getRole() != null ? source.getRole().value : NONESTRING;
 
         hasReminder = source.hasReminder();
         reminderEvent = hasReminder ? source.getReminder().getReminderName() : null;
@@ -108,46 +129,6 @@ class JsonAdaptedApplication {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
-        if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
-        }
-        if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
-        }
-        final Date modelDate = new Date(date);
-
-        if (status == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
-        }
-        if (!Status.isValidStatus(status)) {
-            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
-        }
-        final Status modelStatus = new Status(status);
-
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
@@ -155,6 +136,18 @@ class JsonAdaptedApplication {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
+
+        final Phone modelPhone = parseOptional(phone, Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS, Phone::new);
+
+        final Email modelEmail = parseOptional(email, Email::isValidEmail, Email.MESSAGE_CONSTRAINTS, Email::new);
+
+        final Address modelAddress = parseOptional(address, Address::isValidAddress,
+                                                Address.MESSAGE_CONSTRAINTS, Address::new);
+
+        final Date modelDate = parseOptional(date, Date::isValidDate, Date.MESSAGE_CONSTRAINTS, Date::new);
+
+        final Status modelStatus = parseOptional(status, Status::isValidStatus,
+                Status.MESSAGE_CONSTRAINTS, Status::new);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -180,6 +173,20 @@ class JsonAdaptedApplication {
 
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelDate, modelRole, modelStatus);
+    }
+
+    private <T> T parseOptional(
+            String value,
+            Predicate<String> validator,
+            String errorMessage,
+            Function<String, T> constructor) throws IllegalValueException {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+        if (!validator.test(value)) {
+            throw new IllegalValueException(errorMessage);
+        }
+        return constructor.apply(value);
     }
 
 }
