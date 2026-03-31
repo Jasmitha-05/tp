@@ -102,7 +102,7 @@ public class NameTest {
         assertFalse(name.equals(new Name("Other Valid Name")));
 
         // Different symbols -> returns false
-        Name yahooWithSymbol= new Name("Yahoo!");
+        Name yahooWithSymbol = new Name("Yahoo!");
         Name yahooWithoutSymbol = new Name("Yahoo");
         assertFalse(yahooWithSymbol.equals(yahooWithoutSymbol));
     }
