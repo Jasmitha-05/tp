@@ -1,0 +1,89 @@
+package seedu.address.logic.commands;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.CompanyContainsKeywordPredicate;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.DateMatchesPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ReminderWithinOffsetPredicate;
+import seedu.address.model.person.StatusMatchesPredicate;
+import seedu.address.model.person.TagMatchesPredicate;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON_WITH_REMINDER_INTERVIEW;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+/**
+ * Contains integration tests for {@code UpcomingCommand}.
+ */
+public class UpcomingCommandTest {
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void equals() {
+        int daysOffset = 2;
+        Date firstSampleDate = new Date(LocalDate.of(2026, 4, 2));
+        Date secondSampleDate = new Date(LocalDate.of(2026, 4, 4));
+        ReminderWithinOffsetPredicate firstPredicate = new ReminderWithinOffsetPredicate(firstSampleDate);
+        ReminderWithinOffsetPredicate secondPredicate = new ReminderWithinOffsetPredicate(secondSampleDate);
+
+        UpcomingCommand upcomingFirstCommand = new UpcomingCommand(firstPredicate, daysOffset);
+        UpcomingCommand upcomingSecondCommand = new UpcomingCommand(secondPredicate, daysOffset);
+
+        assertTrue(upcomingFirstCommand.equals(upcomingFirstCommand));
+        assertTrue(upcomingFirstCommand.equals(new UpcomingCommand(firstPredicate, daysOffset)));
+        assertFalse(upcomingFirstCommand.equals(1));
+        assertFalse(upcomingFirstCommand.equals(null));
+        assertFalse(upcomingFirstCommand.equals(upcomingSecondCommand));
+    }
+
+    @Test
+    public void execute_singleMatchFound() {
+        int daysOffset = 4;
+        Date firstSampleDate = new Date(LocalDate.of(2026, 12, 15));
+        ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(firstSampleDate);
+        UpcomingCommand command = new UpcomingCommand(predicate, daysOffset);
+        expectedModel.setReminderOffset(4);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, String.format(UpcomingCommand.MESSAGE_MATCHES_FOUND, 1, 4), expectedModel);
+        assertEquals(Collections.singletonList(BENSON_WITH_REMINDER_INTERVIEW), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_noMatchFound() {
+        int daysOffset = 4;
+        Date firstSampleDate = new Date(LocalDate.of(2024, 2, 18));
+        ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(firstSampleDate);
+        UpcomingCommand command = new UpcomingCommand(predicate, daysOffset);
+        expectedModel.setReminderOffset(4);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, String.format(UpcomingCommand.MESSAGE_NO_MATCHES, 4), expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void toStringMethod() {
+        int daysOffset = 4;
+        Date firstSampleDate = new Date(LocalDate.of(2024, 2, 18));
+        ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(firstSampleDate);
+        UpcomingCommand command = new UpcomingCommand(predicate, daysOffset);
+        String expected = UpcomingCommand.class.getCanonicalName() + "{days offset=" + daysOffset +
+                ", predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
+    }
+
+}

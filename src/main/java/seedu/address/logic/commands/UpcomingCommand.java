@@ -20,7 +20,7 @@ public class UpcomingCommand extends Command {
             + "Example: " + COMMAND_WORD_WITH_SLASH + " 9";
     public static final String MESSAGE_NO_MATCHES = "No upcoming applications in %d days";
     public static final String MESSAGE_MATCHES_FOUND = "There are %d application(s) due in %d days.";
-    public static final String MESSAGE_DAYS_OUT_OF_RANGE = "Days parameter must be between 0 and 9 inclusive.";
+    public static final String MESSAGE_INVALID_ARGS = "Days parameter must be an non-negative integer in digit form, e.g 12.";
 
     private final int daysOffset;
     private final ReminderWithinOffsetPredicate predicate;
