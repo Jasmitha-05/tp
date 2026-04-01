@@ -40,24 +40,30 @@ public class ReminderWithinOffsetPredicateTest {
 
     @Test
     public void test_dateByDate_returnsTrue() {
-        LocalDate sampleDate = LocalDate.of(2026, 4, 1);
+        LocalDate sampleDate = LocalDate.now().plusDays(2);
         // On the same date
         ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(new Date(sampleDate));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob")
-                .withReminder("test", "2026-04-01").buildWithReminder()));
+                .withReminder("test", sampleDate.toString()).buildWithReminder()));
 
         // Before the date
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob")
-                .withReminder("test", "2026-03-20").buildWithReminder()));;
+                .withReminder("test", sampleDate.minusDays(1).toString()).buildWithReminder()));
     }
 
     @Test
     public void test_dateNotByDate_returnsFalse() {
-        LocalDate sampleDate = LocalDate.of(2026, 4, 1);
+
         // After the same date
+        LocalDate sampleDate = LocalDate.now();
         ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(new Date(sampleDate));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob")
-                .withReminder("test", "2026-04-04").buildWithReminder()));
+                .withReminder("test", sampleDate.plusDays(2).toString()).buildWithReminder()));
+        // Date is overdue
+        LocalDate sampleDate2 = LocalDate.now().minusDays(1);
+        ReminderWithinOffsetPredicate predicate2 = new ReminderWithinOffsetPredicate(new Date(sampleDate2));
+        assertFalse(predicate2.test(new PersonBuilder().withName("Alice Bob")
+                .withReminder("test", sampleDate2.toString()).buildWithReminder()));
     }
 
     @Test

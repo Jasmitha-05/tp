@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BENSON_WITH_REMINDER_INTERVIEW;
+import static seedu.address.testutil.TypicalPersons.HENSON_WITH_REMINDER_INTERVIEW_TODAY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
@@ -45,15 +45,21 @@ public class UpcomingCommandTest {
 
     @Test
     public void execute_singleMatchFound() {
+        expectedModel.addPerson(HENSON_WITH_REMINDER_INTERVIEW_TODAY);
+        model.addPerson(HENSON_WITH_REMINDER_INTERVIEW_TODAY);
         int daysOffset = 4;
-        Date firstSampleDate = new Date(LocalDate.of(2026, 12, 15));
+        Date firstSampleDate = new Date(LocalDate.now().plusDays(daysOffset));
         ReminderWithinOffsetPredicate predicate = new ReminderWithinOffsetPredicate(firstSampleDate);
         UpcomingCommand command = new UpcomingCommand(predicate, daysOffset);
-        expectedModel.setReminderOffset(4);
+        expectedModel.setReminderOffset(daysOffset);
+
 
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, String.format(UpcomingCommand.MESSAGE_MATCHES_FOUND, 1, 4), expectedModel);
-        assertEquals(Collections.singletonList(BENSON_WITH_REMINDER_INTERVIEW), model.getFilteredPersonList());
+        assertCommandSuccess(command, model,
+                String.format(UpcomingCommand.MESSAGE_MATCHES_FOUND, 1, daysOffset), expectedModel);
+        assertEquals(Collections.singletonList(HENSON_WITH_REMINDER_INTERVIEW_TODAY), model.getFilteredPersonList());
+        expectedModel.deletePerson(HENSON_WITH_REMINDER_INTERVIEW_TODAY);
+        model.deletePerson(HENSON_WITH_REMINDER_INTERVIEW_TODAY);
     }
 
     @Test
