@@ -125,7 +125,8 @@ public class AddressBookParser {
             return new ToggleCommandParser().parse(arguments);
 
         case RemoveReminderCommand.COMMAND_WORD:
-            return new RemoveReminderCommandParser().parse(arguments);
+            command = new RemoveReminderCommandParser().parse(arguments);
+            break;
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
