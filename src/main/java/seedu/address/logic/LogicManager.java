@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListFolderCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookEditingParser;
 import seedu.address.logic.parser.AddressBookParser;
@@ -65,6 +67,14 @@ public class LogicManager implements Logic {
 
         Command command = currentParser.parseCommand(commandText);
         commandResult = command.execute(model);
+
+        if (commandResult.isListFolders()) {
+            List<String> folders = storage.getAvailableFolders();
+            String message = folders.isEmpty()
+                    ? ListFolderCommand.MESSAGE_NO_FOLDERS
+                    : ListFolderCommand.MESSAGE_FOLDERS_LISTED + String.join("\n", folders);
+            return new CommandResult(message);
+        }
 
         // check if editing mode or normal mode
         switch (commandResult.getParserMode()) {

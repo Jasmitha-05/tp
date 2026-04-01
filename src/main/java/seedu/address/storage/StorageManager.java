@@ -1,11 +1,15 @@
 package seedu.address.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
@@ -94,6 +98,26 @@ public class StorageManager implements Storage {
         addressBookStorage.setAddressBookFilePath(newPath);
         Optional<ReadOnlyAddressBook> loaded = addressBookStorage.readAddressBook();
         return loaded.orElse(new AddressBook());
+    }
+
+    @Override
+    public List<String> getAvailableFolders() {
+        Path dataDir = getAddressBookFilePath().getParent();
+        if (dataDir == null) {
+            return List.of();
+        }
+        File dir = dataDir.toFile();
+        if (!dir.exists() || !dir.isDirectory()) {
+            return List.of();
+        }
+        File[] jsonFiles = dir.listFiles((d, name) -> name.endsWith(".json"));
+        if (jsonFiles == null) {
+            return List.of();
+        }
+        return Arrays.stream(jsonFiles)
+                .map(f -> f.getName().replace(".json", ""))
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override

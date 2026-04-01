@@ -2,11 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import seedu.address.model.Model;
 
 /**
@@ -26,23 +21,7 @@ public class ListFolderCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        File dataDir = new File("data");
-        if (!dataDir.exists() || !dataDir.isDirectory()) {
-            return new CommandResult(MESSAGE_NO_FOLDERS);
-        }
-
-        File[] jsonFiles = dataDir.listFiles((dir, name) -> name.endsWith(".json"));
-        if (jsonFiles == null || jsonFiles.length == 0) {
-            return new CommandResult(MESSAGE_NO_FOLDERS);
-        }
-
-        List<String> folderNames = Arrays.stream(jsonFiles)
-                .map(f -> f.getName().replace(".json", ""))
-                .sorted()
-                .collect(Collectors.toList());
-
-        return new CommandResult(MESSAGE_FOLDERS_LISTED + String.join("\n", folderNames));
+        return new CommandResult(true);
     }
 
 }
