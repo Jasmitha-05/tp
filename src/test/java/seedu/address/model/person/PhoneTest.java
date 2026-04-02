@@ -13,7 +13,7 @@ public class PhoneTest {
         assertThrows(NullPointerException.class, () -> new Phone(null));
     }
 
-        @Test
+    @Test
     public void constructor_validPhone_throwsIllegalArgumentException() {
         assertTrue(Phone.isValidPhone("")); // valid
     }

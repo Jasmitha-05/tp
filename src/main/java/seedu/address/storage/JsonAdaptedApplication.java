@@ -31,6 +31,7 @@ class JsonAdaptedApplication {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
     private static final String NONE_STRING = "";
+    private static final Logger logger = Logger.getLogger(JsonAdaptedApplication.class.getName());
 
     private final String name;
     private final String phone;
@@ -43,6 +44,7 @@ class JsonAdaptedApplication {
     private final String reminderDate;
     private boolean hasReminder = false;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -196,6 +198,4 @@ class JsonAdaptedApplication {
         }
         return constructor.apply(value);
     }
-
-    private static final Logger logger = Logger.getLogger(JsonAdaptedApplication.class.getName());
 }
