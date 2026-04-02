@@ -21,7 +21,7 @@ public class RemoveReminderCommandParser implements Parser<RemoveReminderCommand
      * Parses the given {@code String} of arguments in the context of the RemoveReminderCommand
      * and returns a RemoveReminderCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public RemoveReminderCommand parse(String args) throws ParseException {
         try {

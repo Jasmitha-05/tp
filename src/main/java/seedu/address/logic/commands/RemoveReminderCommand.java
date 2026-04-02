@@ -46,6 +46,7 @@ public class RemoveReminderCommand extends Command {
 
     /**
      * Constructs a Remove Reminder via Index Command.
+     *
      * @param targetIndex List Index of targeted Application.
      */
     public RemoveReminderCommand(Index targetIndex) {
@@ -57,6 +58,7 @@ public class RemoveReminderCommand extends Command {
 
     /**
      * Constructs a Remove Reminder via Reference Command.
+     *
      * @param name Company Name of Application.
      * @param role Role of Application.
      */
@@ -136,8 +138,6 @@ public class RemoveReminderCommand extends Command {
         return lastShownList.stream().filter(predicate).findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_APPLICATION_IDENTIFIER));
     }
-
-
 
     @Override
     public boolean equals(Object other) {

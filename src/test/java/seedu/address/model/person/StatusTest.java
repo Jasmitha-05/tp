@@ -9,10 +9,6 @@ public class StatusTest {
     @Test
     public void isValidStatus() {
 
-        // invalid
-        //        assertFalse(Status.isValidStatus(""));
-        //        assertFalse(Status.isValidStatus(" "));
-
         // valid
         assertTrue(Status.isValidStatus("Applied"));
         assertTrue(Status.isValidStatus("Interviewing"));

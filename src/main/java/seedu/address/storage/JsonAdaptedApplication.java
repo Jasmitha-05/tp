@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -151,13 +152,22 @@ class JsonAdaptedApplication {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                         Reminder.class.getSimpleName()));
             }
+            logger.info("Parsing reminder");
+            logger.warning("Invalid reminder: " + reminderEvent);
             if (!Reminder.isValidReminder(reminderEvent)) {
                 throw new IllegalValueException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
             }
             if (!Date.isValidDate(reminderDate)) {
-                throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(Reminder.DATE_MESSAGE_CONSTRAINTS);
             }
             return new Reminder(reminderEvent, reminderDate);
+        }
+        logger.info("No reminder");
+        if (reminderEvent == null ^ reminderDate == null) {
+            if (reminderEvent == null) {
+                throw new IllegalValueException(Reminder.REMINDER_MESSAGE_CONSTRAINTS);
+            }
+            throw new IllegalValueException(Reminder.DATE_MESSAGE_CONSTRAINTS);
         }
         return null;
     }
@@ -186,4 +196,6 @@ class JsonAdaptedApplication {
         }
         return constructor.apply(value);
     }
+
+    private static final Logger logger = Logger.getLogger(JsonAdaptedApplication.class.getName());
 }

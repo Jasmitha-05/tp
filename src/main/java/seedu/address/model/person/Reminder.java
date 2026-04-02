@@ -15,7 +15,7 @@ public class Reminder {
     public static final String REMINDER_MESSAGE_CONSTRAINTS =
             "Reminder should be letters, and it should not be blank";
     public static final String DATE_MESSAGE_CONSTRAINTS =
-            "Date should follow the format YYYY-MM-DD (e.g., 2024-12-25), and it should be a valid date.";
+            "Date should be valid, follow the format YYYY-MM-DD (e.g., 2024-12-25), and not blank.";
 
 
     private final String reminderName;
