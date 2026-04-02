@@ -13,7 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Role;
 
 /**
- * Class to parse Remove Reminder Commands.
+ * Parses Remove Reminder Commands.
  */
 public class RemoveReminderCommandParser implements Parser<RemoveReminderCommand> {
 
