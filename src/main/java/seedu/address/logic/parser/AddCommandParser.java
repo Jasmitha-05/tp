@@ -44,11 +44,6 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = tokenizeArguments(args);
         validatePrefixes(argMultimap);
-
-        if (!validateDate(argMultimap)) {
-            throw new ParseException(Date.MESSAGE_FUTURE_DATE);
-        }
-
         Application application = buildApplication(argMultimap);
         return new AddCommand(application);
     }
@@ -68,21 +63,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         assert role != null : "role should not be null";
 
         return new Application(name, phone, email, address, tagList, date, role, status, reminder);
-    }
-
-    /**
-     * Checks if the date is a future date.
-     *
-     * @param argMultimap the ArgumentMultimap containing the date to validate
-     * @return true if the date is not in the future
-     */
-    private boolean validateDate(ArgumentMultimap argMultimap) {
-        if (arePrefixesPresent(argMultimap, PREFIX_DATE)) {
-            String dateString = argMultimap.getValue(PREFIX_DATE).get();
-            Date applicationDate = new Date(dateString);
-            return applicationDate.checkNotFutureDate();
-        }
-        return true;
     }
 
     /**
@@ -191,15 +171,24 @@ public class AddCommandParser implements Parser<AddCommand> {
      *
      * @param argMultimap the ArgumentMultimap containing the parsed arguments
      * @return a Date object if present, else null
-     * @throws ParseException
+     * @throws ParseException if the date format is invalid or if the date is in the future
      */
     private Date parseDate(ArgumentMultimap argMultimap) throws ParseException {
         if (arePrefixesPresent(argMultimap, PREFIX_DATE)) {
-            logger.info("date: " + argMultimap.getValue(PREFIX_DATE).get());
-            return ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        } else {
-            return null;
+            String dateString = argMultimap.getValue(PREFIX_DATE).get();
+            logger.info("date: " + dateString);
+
+            try {
+                Date date = ParserUtil.parseDate(dateString);
+                if (!date.checkNotFutureDate()) {
+                    throw new ParseException(Date.MESSAGE_FUTURE_DATE);
+                }
+                return date;
+            } catch (IllegalArgumentException e) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
         }
+        return null;
     }
 
     /**
