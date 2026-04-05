@@ -142,8 +142,7 @@ Shows a list of all the internship applications you have added on OfferFlow.
 Format: `list`
 
 #### Expected Outcome:
-
-  ![List](images/List.png)
+Shows a list of all the applications you have added into OfferFlow
 
 ### Editing an application : `editmode`
 
