@@ -298,7 +298,7 @@ filters for applications with reminders due within the specified number of days 
 Format: `upcoming DAYS`
 
 #### Parameters
-- `DAYS` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned.
+- `[DAYS]` → An integer X from 0 to 7 inclusive, such that applications with reminders due within X days from today are returned.
 
 * Applications with no reminders at all will not be returned.
 * Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
