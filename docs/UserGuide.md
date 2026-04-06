@@ -292,19 +292,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ### Filtering applications: `filter`
 
-Filters applications by company, applied date, status, or tag.
+Filters applications by company, applied date, role, status, or tag.
 
-Format:
-* `filter /n /KEYWORD`
-* `filter /d /YYYY-MM-DD`
-* `filter /s /STATUS`
-* `filter /t /TAG`
+Format: `filter [n/KEYWORD] [d/YYYY-MM-DD] [r/ROLE] [s/STATUS] [t/TAG]`
 
 #### Parameters
-- `KEYWORD` → Name of the company
-- `YYYY-MM-DD` → date
-- `STATUS` → application progress
-- `TAG` → tags in the application
+- `n/KEYWORD` → Name of the company
+- `d/YYYY-MM-DD` → date
+- `r/ROLE` → job role
+- `s/STATUS` → application progress
+- `t/TAG` → tag in the application
 
 Notes:
 * Filter matching is case-insensitive.
@@ -313,10 +310,11 @@ Notes:
 * Applied dates must use `YYYY-MM-DD`.
 
 Examples:
-* `filter /n /Google`
-* `filter /d /2025-11-11`
-* `filter /s /Applied`
-* `filter /t /java`
+* `filter n/Google`
+* `filter d/2025-11-11`
+* `filter r/Software Engineer`
+* `filter s/Applied`
+* `filter t/java`
 
 #### Expected Outcome
 
@@ -478,7 +476,7 @@ Export past applications into different folder to declutter your active list.
 | **Edit** | `editmode INDEX` or `editmode n/NAME r/ROLE` | `editmode 1` then `a/Mapletree Business City II, Pasir Panjang area` then `exitedit`  |
 | **Status** | `status n/COMPANY r/ROLE s/STATUS` | `status n/Tiktok r/Data Analyst s/Rejected` |
 | **Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` |
-| **Filter** | `filter /n /KEYWORD` or `filter /d /YYYY-MM-DD` or `filter /s /STATUS` or `filter /t /TAG` | `filter /n /Tiktok` or `filter /d /2024-06-18` or `filter /s /Rejected` or `filter /t /java` |
+| **Filter** | `filter [n/KEYWORD] [d/YYYY-MM-DD] [r/ROLE] [s/STATUS] [t/TAG]` | `filter n/Tiktok` or `filter d/2024-06-18` or `filter r/Backend Developer` or `filter s/Rejected` or `filter t/java` |
 | **Folder** | `folder FOLDER_NAME` | `folder Y1S2` |
 | **Toggle** | `toggle FOLDER_NAME` | `toggle Y1S2` |
 | **List** | `list` | `list` |
