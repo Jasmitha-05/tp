@@ -16,7 +16,7 @@ public class StatusTest {
 
         // valid
         assertTrue(Status.isValidStatus("Applied"));
-        assertTrue(Status.isValidStatus("Interviewing"));
+        assertTrue(Status.isValidStatus("Interview"));
         assertTrue(Status.isValidStatus("Rejected"));
         assertTrue(Status.isValidStatus("Offered"));
         assertTrue(Status.isValidStatus("Custom Status"));

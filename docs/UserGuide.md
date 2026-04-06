@@ -134,13 +134,13 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 #### Valid Status Values
 - Interested
 - Applied
-- Interviewing
+- Interview
 - Rejected
 - Offered
 
 #### Examples
 * `status n/Tiktok r/Data Analyst s/Applied`
-* `status n/Google r/Software Engineer s/Interviewing`
+* `status n/Google r/Software Engineer s/Interview`
 * `status n/Meta r/ML Engineer s/Rejected`
 
 #### Expected Outcome

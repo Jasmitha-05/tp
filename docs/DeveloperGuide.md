@@ -526,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Application**: A job or internship application submitted by the user to a company.
 * **Duplicate**:  A repeated Application with the same <Company_Name> and <Job_Role>.
 * **Contact**: A record containing information about a company or recruiter, including name, role, and company.
-* **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interviewing, Rejected, Offered).
+* **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interview, Rejected, Offered).
 * **Notification**:  A reminder sent by OfferFlow to alert the user about upcoming deadlines or interview dates.
 * **Folder**:  A storage group that allows users to archive past job search sessions.
 * **Interaction**:   Any recorded communication or follow-up with a recruiter or company (e.g., email reply or interview invitation).
