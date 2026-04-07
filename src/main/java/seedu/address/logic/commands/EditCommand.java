@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -46,17 +48,22 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Note that [" + PREFIX_REMINDER + " REMINDER] must be paired with "
+            + "[" + PREFIX_REMINDER_DATE + " REMINDER_DATE]. \n"
             + "Example: "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Application: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Application: %1$s. To exit editing mode, "
+            + "enter \"editexit\".";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Note only edit "
             + "commands are allowed in editing mode. To exit editing mode, enter \"editexit\".";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This application already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This application already exists in the address book."
+            + "To exit editing mode, enter \"editexit\".";
     public static final String MESSAGE_NO_APPLICATION_EDITED = "No application is marked for editing "
             + "- this is likely due to an internal error.";
-    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today.";
+    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today. To exit editing "
+            + "mode, enter \"editexit\"";
 
     private final EditPersonDescriptor editPersonDescriptor;
 
