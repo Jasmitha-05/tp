@@ -75,24 +75,40 @@ Shows you a message explaining how to access the help page.
 
 Format: `help`
 
+### Application
+
+An internship application must include a company name and the role applied for. All other fields are optional.  
+Each application supports the following parameters:
+
+#### Parameters
+- `n/NAME` → Name of the company
+- `r/ROLE` → job position applied for
+- `p/PHONE` → company telephone number
+- `e/EMAIL` → company email
+- `a/ADDRESS` → company location
+- `d/DATE` → date when you applied
+- `s/STATUS` → application progress
+- `t/TAGS` → optional fields
+- `u/REMINDER ud/DATE` → Reminder description and Date of reminder
 
 ### Adding an internship application: `add`
 
-Adds the internship application you have applied for, to help you keep track of all your applications.
+Adds the internship application you have applied for, to help track all your applications.
 
 <box type="warning" seamless>
 
 **Caution:**
-OfferFlow by default does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to [overwrite](#overwrite-duplicate-application--overwrite) it (ie: replace the pre-existing application with the new application)
+OfferFlow does not allow duplicate application with same name and role. Hence, if you choose to add application with duplicate name and role, you can choose whether or not to [overwrite](#overwrite-duplicate-application--overwrite) it (ie: replace the pre-existing application with the new application)
 </box>
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`
+Format: `add n/NAME r/ROLE ...`
 
 <box type="tip" seamless>
 
-**Tip:** An application can have any number of tags (including 0)
+**Tip:** Application can be added with only name and role, other fields are optional
 </box>
 
+Notes:
 ⚠️ Note:
 * name and role is case insensitive
 * Emails should be of the format `local-part@domain`
@@ -101,10 +117,10 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS d/DATE r/ROLE s/STATUS [t/TAG]...`
 * Only the `n/NAME` and `r/ROLE` fields are compulsory, other fields are optional
 
 #### Examples:
-* `add n/Google r/Software Engineer p/12345678 e/careers@google.com a/1600 Amphitheatre Parkway, Mountain View, CA d/2024-03-15 s/applied t/tech t/remote u/Interview ud/2026-04-06`
-* `add n/Google p/12345678 e/careers@google.com a/123 Silicon Valley d/2025-06-01 r/QA Engineer s/pending`
 * `add n/Meta r/ML engineer`
 * `add n/Tiktok r/data analyst p/99999999 s/interview`
+* `add n/Google r/Software Engineer p/12345678 e/careers@google.com a/1600 Amphitheatre Parkway, Mountain View, CA d/2024-03-15 s/applied t/tech t/remote u/Interview ud/2026-04-06`
+* `add n/Google p/12345678 e/careers@google.com a/123 Silicon Valley d/2025-06-01 r/QA Engineer s/pending`
 
 #### Expected Outcome:
 
@@ -169,6 +185,7 @@ Notes:
 - `r/ROLE` → job position applied for
 - `s/STATUS` → application progress
 - `t/TAGS` → optional fields
+- `u/REMINDER ud/DATE` → Reminder description and Date of reminder
 
 #### Examples:
 * `editmode 1` or `editmode n/Google r/Software Engineer`
@@ -235,14 +252,15 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 - `s/STATUS` → New status
 
 #### Valid Statuses
-| Status | When to use |
-|:-------|:------------|
-| **Interested** | Found the role, planning to apply |
-| **Applied** | Submitted your application |
-| **Interview** | Interviews scheduled (congrats, halfway there!) |
-| **Rejected** | Didn't get it (we've all been there) |
-| **Offered** | 🎉 You got the offer! |
-| **Accepted** | You accepted the offer (your hardwork has paid off!) |
+| Status         | When to use                                                                     |
+|:---------------|:--------------------------------------------------------------------------------|
+| **Interested** | Found the role, planning to apply                                               |
+| **Applied**    | Submitted your application                                                      |
+| **Interview**  | Interviews scheduled (congrats, halfway there!)                                 |
+| **Pending**    | Waiting for Application outcome                                                 |
+| **Rejected**   | Didn't get it (we've all been there)                                            |
+| **Offered**    | 🎉 You got the offer!                                                           |
+| **Accepted**   | You accepted the offer (your hardwork has paid off!)                            |
 
 #### Examples
 
@@ -347,7 +365,7 @@ Examples:
 
 ### Deleting an application : `delete`
 
-You can delete a specified application from OfferFlow via index or reference via Company name and Role.
+Delete an application in OfferFlow via index or reference via Company name and Role.
 
 Format: `delete INDEX` or `delete n/NAME r/ROLE`
 
