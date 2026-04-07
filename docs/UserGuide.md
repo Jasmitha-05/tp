@@ -163,12 +163,12 @@ Format:
 3. `exitedit` to finish editing and exit the editing mode
 
 Notes:
-* Enters editing mode for the application at the specified `INDEX` or with the specified `NAME` and `ROLE`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* Enters editing mode for the application at the specified `INDEX` or with the specified `NAME` and `ROLE`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, …
 * Once editing mode is entered, *all commands* except for *editexit* and *editing commands* will be disabled.
 * Edit the application in edit mode by typing in at least one of the optional fields.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the application will be removed i.e adding of tags is not cumulative.
+* You can remove all the application’s tags by typing `t/` without
   specifying any tags after it.
 
 #### Parameters
