@@ -332,19 +332,21 @@ Format: `upcoming DAYS`
 
 ### Filtering applications: `filter`
 
-Filters applications by company, applied date, status, or tag.
+Filters applications by company, applied date, role, status, or tag.
 
 Format:
 * `filter n/NAME`
 * `filter d/YYY-MM-DD`
+* `filter r/ROLE`
 * `filter s/STATUS`
 * `filter t/TAG`
 
 #### Parameters
-- `KEYWORD` → Name of the company
-- `YYYY-MM-DD` → date
-- `STATUS` → application progress
-- `TAG` → tags in the application
+- `n/KEYWORD` → Name of the company
+- `d/YYYY-MM-DD` → date
+- `r/ROLE` → job role
+- `s/STATUS` → application progress
+- `t/TAG` → tag in the application
 
 Notes:
 * Filter matching is case-insensitive.
@@ -354,7 +356,8 @@ Notes:
 
 Examples:
 * `filter n/Google`
-* `filter d/2025-12-11`
+* `filter d/2025-11-11`
+* `filter r/Software Engineer`
 * `filter s/Applied`
 * `filter t/java`
 
