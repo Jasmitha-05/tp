@@ -172,7 +172,8 @@ The sequence diagram below shows how a filter command is parsed and executed:
 
 `AddressBookParser` routes `filter ...` input to `FilterCommandParser`. The parser then:
 
-* tokenizes the input using the supported filter prefixes: `n/`, `d/`, `r/`, `s/`, and `t/`
+* tokenizes the input using the supported filter prefixes:
+  `n/` (company name), `d/` (application date), `r/` (role), `s/` (status), and `t/` (tag)
 * rejects malformed commands such as unsupported prefixes, repeated single-value prefixes, empty values, or invalid
   dates
 * constructs a list of predicates, one for each supplied criterion
@@ -203,7 +204,7 @@ The sequence diagram below shows how a status update command is parsed and execu
 
 `AddressBookParser` routes `status ...` input to `StatusCommandParser`. The parser:
 
-* requires the prefixes `n/`, `r/`, and `s/`
+* requires the prefixes `n/` (company name), `r/` (role), and `s/` (new status)
 * explicitly rejects prefixes unrelated to status updates such as phone, email, address, tag, and date
 * prevents duplicate occurrences of the required prefixes
 * parses the target name, role, and new status into domain objects before constructing `StatusCommand`
