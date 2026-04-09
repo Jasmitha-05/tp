@@ -492,13 +492,13 @@ but can also choose to add other optional details (date of application, contact 
 
       Use case ends.
 
-* 3a. The given reminder description or date is invalid.
+* 3a. The given reminder description or reminder date is invalid.
 
    * 3a1. OfferFlow shows an error message.
 
       Use case resumes at step 3.
 
-* 3b. The reminder description or date is missing.
+* 3b. The reminder description or reminder date is not inputted.
 
    * 3b1. OfferFlow shows an error message.
 
