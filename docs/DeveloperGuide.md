@@ -909,7 +909,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `rmr INDEX`<br>
        Expected: Reminder is removed from the Application at specified `INDEX`.
 
-### [Creating a new folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#creating-a-new-offerflow-folder--folder)
+### [Creating a new folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#creating-a-new-offerflow-folder-folder)
 
 1. Creating a folder with a valid name
 
@@ -940,7 +940,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `folder name@folder`<br>
       Expected: No folder created. Same error as above.
 
-### [Switching to an existing folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#switching-to-an-existing-offerflow-folder--toggle)
+### [Switching to an existing folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#switching-to-an-existing-offerflow-folder-toggle)
 
 1. Switching to an existing folder
 
@@ -965,7 +965,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `toggle Y1 S2`<br>
       Expected: No switch occurs. Error message stating folder name can only contain letters, numbers, underscores, and hyphens.
 
-### [Listing all folders](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#listing-all-address-books--folders)
+### [Listing all folders](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#listing-all-address-books-folders)
 
 1. Listing folders when folders exist
 
@@ -981,7 +981,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `folders`<br>
       Expected: Only `addressbook` is listed.
 
-### Updating application status
+### [Updating application status](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#updating-application-status-status)
+
 
 1. Updating the status of an application
 
@@ -999,9 +1000,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `status n/NUS r/tester s/Waiting`<br>
        Expected: No application is updated. Error details show that the status value is invalid.
 
-1. _{ more test cases ... }_
-
-### Filtering applications
+### [Filtering applications](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#filtering-applications-filter)
 
 1. Filtering applications by supported fields
 
@@ -1015,28 +1014,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `filter n/Google s/Pending`<br>
        Expected: Only the `Google Product Manager` application is shown because all supplied criteria must match.
-
-
-1. _{ more test cases ... }_
-
-### Saving data
-
-1. Dealing with missing data files
-
-   1. Manually change a status of an application in `[JAR file location]/data/addressbook.json` to `""`
-      Expected: When user reopens the app, the status gets automatically updated to `"Interested"`
-
-   2. Manually change other fields in `[JAR file location]/data/addressbook.json` to `""`
-      Testcase: change name field to `""`
-      Expected: OfferFlow would clear all the applications and start with an empty file
-
-2. Dealing with corrupt data files
-
-   1. Manually change fields in `[JAR file location]/data/addressbook.json` to invalid values
-      Testcase: change phone number field to `12` (phone number must be atleast 3 digits)
-      Expected: OfferFlow would clear all the applications and start with an empty file
-
-
 
 ### [Viewing upcoming applications](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#locating-applications-with-upcoming-deadlines-upcoming)
 
@@ -1061,8 +1038,22 @@ testers are expected to do more *exploratory* testing.
     2. Testcase: Close the application either by typing `exit` or clicking the X on the window. Re-launch the app by double-clicking the jar file.<br>
        Expected: Observed application list on re-launch is the same as before closing the application.
 
-1. _{ more test cases …​ }_
+### Saving data
 
+1. Dealing with missing data files
+
+   1. Manually change a status of an application in `[JAR file location]/data/addressbook.json` to `""`
+      Expected: When user reopens the app, the status gets automatically updated to `"Interested"`
+
+   2. Manually change other fields in `[JAR file location]/data/addressbook.json` to `""`
+      Testcase: change name field to `""`
+      Expected: OfferFlow would clear all the applications and start with an empty file
+
+2. Dealing with corrupt data files
+
+   1. Manually change fields in `[JAR file location]/data/addressbook.json` to invalid values
+      Testcase: change phone number field to `12` (phone number must be atleast 3 digits)
+      Expected: OfferFlow would clear all the applications and start with an empty file
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
