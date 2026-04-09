@@ -377,8 +377,8 @@ After every command, `MainWindow` calls `Logic#getAddressBookFilePath()` and upd
 
 ### Upcoming feature
 
-The `upcoming` command is responsible for first narrowing the currently displayed application list similar to `filter`, 
-and secondly saving the parameter to disk so that the application may re-apply the same operation on start-up. 
+The `upcoming` command is responsible for first narrowing the currently displayed application list similar to `filter`,
+and secondly saving the parameter to disk so that the application may re-apply the same operation on start-up.
 
 The sequence diagram below shows how an upcoming command is parsed and executed:
 
@@ -386,23 +386,15 @@ The sequence diagram below shows how an upcoming command is parsed and executed:
 
 `AddressBookParser` routes `upcoming ...` input to `UpcomingCommandParser`. The parser then:
 
-* rejects malformed commands such as empty values, non-integer values, or invalid integer values 
+* rejects malformed commands such as empty values, non-integer values, or invalid integer values
 * constructs a predicate `ReminderWithinOffsetPredicate`, which is used similarly to the predicate constructed
   by the `filter` command
 
 When the resulting `UpcomingCommand` executes, it calls `Model#updateFilteredApplicationList(predicate)` to a similar
-effect as the `filter` command. 
-In addition, the command will save the parameter given to disk. Due to similar restrictions in accessing storage as in `folder` command, 
+effect as the `filter` command.
+In addition, the command will save the parameter given to disk. Due to similar restrictions in accessing storage as in `folder` command,
 the command instead updates this value by calling `Model#setReminderOffset(offset)` which in turn calls `UserPrefs#setReminderOffset(reminderOffset)`. This will set
-the value of a variable which will be saved to disk via `preferences.json` upon closure of the application. 
-
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
+the value of a variable which will be saved to disk via `preferences.json` upon closure of the application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -784,8 +776,6 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### [Editing an application](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#editing-an-application-editmode)
 
 1. Edit different applications with [different parameters](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#application)
@@ -797,7 +787,6 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `s/Applied`<br>
        Expected: Application status now changed to `Applied`.
-
 
 ### Saving data
 
