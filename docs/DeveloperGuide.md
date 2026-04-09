@@ -443,29 +443,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to update the application status.
-2. OfferFlow requests the new status value.
-3. User specifies a new status (e.g., plan to apply, applied, interviewing, rejected, offered).
-4. OfferFlow updates the application status.
-5. OfferFlow displays the updated application information.
+1. User requests to update the status of a specific application.
+2. OfferFlow identifies the application to be updated.
+3. User provides the new status.
+4. OfferFlow updates the application's status and shows the updated application details.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. Application not found
+* 1a. The user enters the command in an invalid format.
 
-   * 3a1. OfferFlow informs the user that the application cannot be located.
+   * 1a1. OfferFlow shows an error message.
 
-   * 3a2. User returns to the application list.
+      Use case ends.
 
-      Use case resumes from step 2.
+* 2a. OfferFlow cannot find an application matching the given company name and role.
 
-   * 7a. Invalid status entered
-      * 7a1. OfferFlow informs the user that the status is invalid.
-      * 7a2. OfferFlow requests the user to specify a valid status.
+   * 2a1. OfferFlow shows an error message.
 
-      Use case resumes from step 7.
+      Use case ends.
+
+* 2b. The status provided by the user is invalid.
+
+   * 2b1. OfferFlow shows an error message.
+
+      Use case ends.
 
 **Use case: UC4 - Add application**
 
@@ -549,53 +552,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Add filter to contact list**
+**Use case: Filter applications**
 
 **MSS**
 
-1. User requests to add a filter to application list.
-2. OfferFlow prompts user to input the details of the new filter.
-3. User inputs the details of the filter to add to the application list.
-4. OfferFlow updates the application list view with the new filter.
+1. User requests to filter the application list.
+2. OfferFlow prompts for the filter criteria.
+3. User specifies one or more filter criteria.
+4. OfferFlow applies the given filter criteria and displays the matching applications.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The user enters details in an invalid format.
-
-    * 3a1. OfferFlow shows an error message.
-
-    * 3a2. User re-enters the details.
-
-      Use case resumes at step 4.
-
-**Use case: Remove filter from contact list**
-
-**MSS**
-
-1. User requests to remove a filter to application list.
-2. OfferFlow prompts user to input the details of the filter to be removed.
-3. User inputs the details of the filter to remove from the contact list.
-4. OfferFlow updates the application list to reflect the deletion of the filter.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No filters have been applied on application list.
+* 1a. The user enters the command in an invalid format.
 
     * 1a1. OfferFlow shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 3a. The user specifies a non-existent filter.
+* 2b. The user provides an invalid filter value.
 
-    * 2a1. OfferFlow shows an error message.
+    * 2b1. OfferFlow shows an error message.
 
-    * 2a2. User re-enters the details.
+      Use case ends.
 
-      Use case resumes at step 4.
+* 3a. No applications match the specified criteria.
+
+    * 3a1. OfferFlow informs the user that no matching applications were found.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
