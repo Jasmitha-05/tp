@@ -915,15 +915,11 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `rmr INDEX`<br>
        Expected: Reminder is removed from the Application at specified `INDEX`.
 
-<<<<<<< HEAD
-### [Creating a new folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#creating-a-new-offerflow-folder-folder)
-=======
 3. Removing a reminder of a non-existing application.
-   1. Test case: `rmr 1000` or `rmr n/invalidwrongname r/nosuchrole`<br>
-      Expected: Error warning that application is not found.
+    1. Test case: `rmr 1000` or `rmr n/invalidwrongname r/nosuchrole`<br>
+       Expected: Error warning that application is not found.
 
 ### [Creating a new folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#creating-a-new-offerflow-folder--folder)
->>>>>>> 28697943d72c22204deebbc96f464fef1001a898
 
 1. Creating a folder with a valid name
 
