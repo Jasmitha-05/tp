@@ -895,7 +895,7 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `d/abcde`<br>
        Expected: Edit failed, error details appear.
-    
+
     5. Test case: `editexit`<br>
        Expected: Application exits editing mode.
 
