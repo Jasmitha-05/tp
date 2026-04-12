@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# OfferFlow Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -484,8 +484,7 @@ but can also choose to add other optional details (date of application, contact 
 
    * 1c. If the user enters an application with invalid format for any detail field (job position, date, reminder, status, address, email, or phone number)
 
-      * 1c1. the process follows step 1b extension. However, the error message will be specific to each invalid field,
-      showing either the valid format or the specific error reason.
+      * 1c1. the process is similar to the steps in 1b extension. However, the error message will be specific to each invalid field showing either the valid format or the specific error reason. <br>
 
    * 1d. The user enters the wrong command format when trying to add an application
 
