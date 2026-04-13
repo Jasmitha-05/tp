@@ -13,9 +13,26 @@
 
 ## **Acknowledgements**
 
+* Kai Jun:
+   * Use Claude as debugging/troubleshooting tool
+   * Use Claude for generating testcases
+
+* Enzo:
+   * Use Claude as debugging/troubleshooting tool
+   * Use Claude for generating testcases
+   * Use Claude for checkstyle error fixing
+
+* Elliot:
+   * Use Chatgpt as debugging/troubleshooting tool
+   * Use Chatgpt for generating testcases
+
 * Jasmitha:
    * Use auto-complete tool for coding
    * Use ChatGPT as debugging/troubleshooting tool
+
+* Ethan:
+   * Use ChatGPT for generating testcases
+   * Use auto-complete tool for coding
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -929,12 +946,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `folder`<br>
       Expected: No folder created. Error message stating folder name cannot be empty.
 
-   2. Test case: `folder Y1 S2`<br>
-      Expected: No folder created. Error message stating folder name can only contain letters, numbers, underscores, and hyphens.
-
-   3. Test case: `folder name@folder`<br>
-      Expected: No folder created. Same error as above.
-
 ### [Switching to an existing folder](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#switching-to-an-existing-offerflow-folder-toggle)
 
 1. Switching to an existing folder
@@ -956,9 +967,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `toggle`<br>
       Expected: No switch occurs. Error message stating folder name cannot be empty.
-
-   2. Test case: `toggle Y1 S2`<br>
-      Expected: No switch occurs. Error message stating folder name can only contain letters, numbers, underscores, and hyphens.
 
 ### [Listing all folders](https://ay2526s2-cs2103t-f10-4.github.io/tp/UserGuide.html#listing-all-address-books-folders)
 
@@ -1017,13 +1025,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `upcoming 5`<br>
        Expected: Only applications with deadlines due within 5 days of current date are shown. Applications with overdue deadlines or no deadlines should not be shown.
 
-    2. Testcase: `upcoming 9`<br>
-       Expected: Command fails. Specified number of days out of bounds.
-
-    3. Testcase: `upcoming i`<br>
+    2. Testcase: `upcoming i`<br>
        Expected: Command fails. i is not a valid input for number of days.
 
-    4. Testcase: `upcoming`<br>
+    3. Testcase: `upcoming`<br>
        Expected: Command fails. Specified number of days cannot be blank.
 
 2. Upcoming command is saved between exit and startup.
@@ -1057,6 +1062,16 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1. **Valid statuses limited**: Currently our status only allows a fixed set of status (`Interested`, `Interview`, `Pending`, `Rejected`, `Offered` and `Accepted`). We plan to expand this set of status to allow more statuses like `OA`, `Assignment` and other custom statuses
+
+2. **Folders cannot be deleted**: Currently there is no command available for user to delete existing folders. We plan to add such command in the future
+
+3. **Redundant words not captured in Editmode**: Currently user can type anything before the actual prefixes that they want to edit in the editing mode (ie: `hello p/123456`, the `hello` would be ignored). We plan to restrict such addition of redundant words.
+
+4. **Reminder date can be past date**: Currently reminder date also allows past dates (eg: `2024-11-11`). We plan to only allow future dates since reminder date is supposed to be for deadline
+
+5. **Unlimited parameter length allowed**: Currently we do restrict the length for the different fields so it causes it to be truncated during display. We plan to restrict the length in the future
+
+6. **Filtering multliple of the same field is disabled**: Currently users cannot filter for multiple keywords from the same field/prefix (eg:`filter n/google n/meta r/backend` fails as cannot filter by more than 1 company name). We plan to allow users to filter multiple keywords of the same prefix/field
 
 --------------------------------------------------------------------------------------------------------------------
 
