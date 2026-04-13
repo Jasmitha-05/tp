@@ -145,7 +145,7 @@ Format: `add n/NAME r/ROLE ...`
 Overwrites pre-existing application in OfferFlow that has the same name and role, with the new application when you try to add an application with the same name and role as another already existing application
 
 #### Example:
-* `add n/Google r/QA Engineer d/2025-12-12`
+* `add n/Google r/QA Engineer d/2025-12-12 s/ `
 
   <img src="images/DuplicateApplication.png" width="500" height="400"/>
 
