@@ -1070,6 +1070,10 @@ Team size: 5
 
 6. **Filtering multliple of the same field is disabled**: Currently users cannot filter for multiple keywords from the same field/prefix (eg:`filter n/google n/meta r/backend` fails as cannot filter by more than 1 company name). We plan to allow users to filter multiple keywords of the same prefix/field
 
+7. **Limited naming for folder**: In the future we will allow more variation of folder naming like "!, +, -, *"
+
+8. **Overwrite discards stored application**: Currently, if user keys in any other commands other than overwrite, the duplicate stored application gets discarded. Plan to prolong the storage so that user can overwrite whenever they want.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
