@@ -47,17 +47,19 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "EMAIL] [" + PREFIX_ADDRESS + "ADDRESS] [" + PREFIX_TAG + "TAG]...\n"
             + "Note that [" + PREFIX_REMINDER + " REMINDER] must be paired with ["
             + PREFIX_REMINDER_DATE + " REMINDER_DATE]. \n"
-            + "Example: " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "Example: " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com"
+            + "\nTo exit editing mode, enter \"editexit\".";
 
-    public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s. To exit editing mode, "
+    public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s. \nTo exit editing mode, "
                                     + "enter \"editexit\".";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Note only edit "
-                                    + "commands are allowed in editing mode. To exit editing mode, enter \"editexit\".";
-    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in the address book."
+                                    + "commands are allowed in editing mode.\n "
                                     + "To exit editing mode, enter \"editexit\".";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in the address book."
+                                    + "\nTo exit editing mode, enter \"editexit\".";
     public static final String MESSAGE_NO_APPLICATION_EDITED = "No application is marked for editing "
                                     + "- this is likely due to an internal error.";
-    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today. To exit editing "
+    public static final String MESSAGE_DATE_NOT_ALLOWED = "Date cannot be a date later than today. \nTo exit editing "
                                     + "mode, enter \"editexit\"";
 
     private final EditApplicationDescriptor editApplicationDescriptor;

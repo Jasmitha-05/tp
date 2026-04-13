@@ -12,17 +12,16 @@ import seedu.address.model.application.ReminderWithinOffsetPredicate;
 public class UpcomingCommand extends Command {
 
     public static final int MIN_OFFSET = 0;
-    public static final int MAX_OFFSET = 7;
+    public static final int MAX_OFFSET = 31;
 
     public static final String COMMAND_WORD = "upcoming";
-    public static final String COMMAND_WORD_WITH_SLASH = "/upcoming";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD_WITH_SLASH + ": Sets reminder to display all "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets reminder to display all "
             + "applications within the specified number of days from the current date, then displays one "
-            + "such notifcation. \nParameters: [DAYS_OFFSET]...\nExample: " + COMMAND_WORD_WITH_SLASH + " 7";
+            + "such notification. \nParameters: [DAYS_OFFSET]...\nExample: " + COMMAND_WORD + " 7";
     public static final String MESSAGE_NO_MATCHES = "No upcoming applications in %d days";
     public static final String MESSAGE_MATCHES_FOUND = "There are %d application(s) due in %d days.";
-    public static final String MESSAGE_INVALID_ARGS = "Days parameter must be an " + "an integer between " + MIN_OFFSET
+    public static final String MESSAGE_INVALID_ARGS = "Days parameter must be " + "an integer between " + MIN_OFFSET
                                     + " and " + MAX_OFFSET + " inclusive in digit form, e.g 5.";
 
     private final int daysOffset;
