@@ -73,11 +73,11 @@ public class StatusCommand extends Command {
 
         SameCompanySameRolePredicate predicate = new SameCompanySameRolePredicate(new Name(name), new Role(role));
         if (model.appNotInFullList(predicate)) {
-            throw new CommandException(Messages.MESSAGE_APPLICATION_NOT_IN_FILTERED);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_IDENTIFIER);
         }
 
         if (target == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_IDENTIFIER);
+            throw new CommandException(Messages.MESSAGE_APPLICATION_NOT_IN_FILTERED);
         }
 
         if (target.hasReminder()) {
