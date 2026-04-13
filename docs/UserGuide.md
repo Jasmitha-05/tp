@@ -116,7 +116,7 @@ Format: `add n/NAME r/ROLE ...`
 * name and role is case insensitive
 * name does not allow some special character like /
 * Emails should be of the format `local-part@domain`
-* If applied dates must use `YYYY-MM-DD` and cannot be a future date
+* If applied dates (`d/DATE`) must use `YYYY-MM-DD` and cannot be a future date
 * Reminder can only be added if both reminder name (`u/`) and reminder date (`ud/`) is provided
 * Reminder due today or earlier will be displayed in red, others will be displayed in orange
 * Multiple tags allowed
