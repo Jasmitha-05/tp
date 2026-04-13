@@ -18,15 +18,25 @@ public class ToggleCommandParserTest {
     }
 
     @Test
-    public void parse_nameWithSpaces_throwsParseException() {
-        assertParseFailure(parser, "Y1 S2",
-                "Folder name can only contain letters, numbers, underscores, and hyphens.");
+    public void parse_validArgsWithSpaces_returnsToggleCommand() {
+        assertParseSuccess(parser, "Y1 S2", new ToggleCommand("y1 s2"));
     }
 
     @Test
     public void parse_nameWithSpecialChars_throwsParseException() {
-        assertParseFailure(parser, "name@folder",
-                "Folder name can only contain letters, numbers, underscores, and hyphens.");
+        assertParseFailure(parser, "name!folder",
+                "Folder name can only contain letters, numbers, spaces, "
+                + "underscores (_), hyphens (-), dots (.), and '@' symbols.");
+    }
+
+    @Test
+    public void parse_validArgsWithAt_returnsToggleCommand() {
+        assertParseSuccess(parser, "name@folder", new ToggleCommand("name@folder"));
+    }
+
+    @Test
+    public void parse_validArgsWithDot_returnsToggleCommand() {
+        assertParseSuccess(parser, "Y1.S2", new ToggleCommand("y1.s2"));
     }
 
     @Test
