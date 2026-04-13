@@ -18,10 +18,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("folder Y1S2")
+[-> LogicManager : execute("folder y1s1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("folder Y1S2")
+LogicManager -> AddressBookParser : parseCommand("folder y1s1")
 activate AddressBookParser
 
 create FolderCommandParser
@@ -31,7 +31,7 @@ activate FolderCommandParser
 FolderCommandParser --> AddressBookParser
 deactivate FolderCommandParser
 
-AddressBookParser -> FolderCommandParser : parse("Y1S2")
+AddressBookParser -> FolderCommandParser : parse("y1s1")
 activate FolderCommandParser
 
 create FolderCommand
@@ -58,7 +58,7 @@ activate CommandResult
 
 note right of CommandResult
   CommandResult signals:
-  folderName="Y1S2", isCreateNew=true
+  folderName="y1s1", isCreateNew=true
 end note
 
 CommandResult --> FolderCommand
@@ -68,7 +68,7 @@ FolderCommand --> LogicManager : r
 deactivate FolderCommand
 
 
-LogicManager -> Storage : createFolder("Y1S2")
+LogicManager -> Storage : createFolder("y1s1")
 activate Storage
 
 Storage --> LogicManager

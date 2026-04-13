@@ -106,7 +106,7 @@ Format: `add n/NAME r/ROLE ...`
 
 <box type="tip" seamless>
 
-**Tip:** 
+**Tip:**
 * Application can be added with only the `n/NAME` and `r/ROLE` fields, other fields are optional
 * Application parameters (except name and role) can be removed by leaving the value after the prefix empty
 
@@ -304,6 +304,13 @@ Helps you finds applications whose company names contain any of the given keywor
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<box type="warning" seamless>
+
+**Caution:**
+* Applications that were added to OfferFlow but not in the current filtered list cannot be updated via `n/NAME` `r/ROLE` reference
+* Type `list` to access and update any applications
+</box>
+
 <box type="info" seamless>
 
 **⚠️ Note:**
@@ -343,7 +350,7 @@ Format: `upcoming DAYS`
 **⚠️ Note:**
 * Applications with no reminders at all will not be returned.
 * Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
-* `DAYS` is an integer from 0 to 7 inclusive
+* `DAYS` is an integer from 0 to 31 inclusive
 
 </box>
 
@@ -508,7 +515,7 @@ Format: `exit`
 
 Shows you a message explaining how to access the help page.
 
-  <img src="images/helpMessage.png"/>
+  ![help](images/helpMessage.png)
 
 Format: `help`
 
@@ -518,7 +525,7 @@ OfferFlow data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-OfferFlow data are saved automatically as a JSON file depending on the folder the user is in, eg. `[JAR file location]/data/addressbook.json` or `[JAR file location]/data/Y1S1.json` etc. Advanced users are welcome to update data directly by editing these data files.
+OfferFlow data are saved automatically as a JSON file depending on the folder the user is in, eg. `[JAR file location]/data/addressbook.json` or `[JAR file location]/data/y1s1.json` etc. Advanced users are welcome to update data directly by editing these data files.
 
 <box type="warning" seamless>
 
@@ -555,7 +562,7 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 | **Exit Edit**       | `editexit`                                                                                         | `editexit`                                                                                                                       |
 | **Remove Reminder** | `rmr INDEX` or `rmr n/NAME r/ROLE`                                                                 | `rmr 3` or `rmr n/Google r/Backend Developer`                                                                                    |
 | **Status**          | `status n/COMPANY r/ROLE s/STATUS`                                                                 | `status n/Tiktok r/Data Analyst s/Rejected`                                                                                      |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                                |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find Meta Amazon`                                                                                                                |
 | **Filter**          | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected t/java`                         |
 | **Folder**          | `folder FOLDER_NAME`                                                                               | `folder Y1S2`                                                                                                                    |
 | **Toggle**          | `toggle FOLDER_NAME`                                                                               | `toggle Y1S2`                                                                                                                    |
