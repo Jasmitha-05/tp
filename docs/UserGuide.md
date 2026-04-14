@@ -161,7 +161,7 @@ If you choose to overwrite, type `overwrite`. If not, continue using the app as 
 #### Expected Outcome (overwrite):
 
   <img src="images/Overwrite.png" width="500" height="400"/>
-
+<br>
 
 ### Editing an application : `editmode`
 
@@ -211,6 +211,7 @@ Exit editing mode:
 #### Expected outcome:
 
   <img src="images/Edit.png" width="500" height="400"/>
+<br>
 
 ### Modifying Reminders: `Reminder`
 
@@ -341,6 +342,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 #### Expected Outcome:
 
   <img src="images/Find.png" width="500" height="400"/>
+<br>
 
 ### Listing all internship applications : `list`
 
@@ -404,7 +406,7 @@ Examples:
 #### Expected Outcome (eg: filter n/Google)
 
   <img src="images/Filter.png" width="500" height="400"/>
-
+<br>
 
 ### Deleting an application : `delete`
 
