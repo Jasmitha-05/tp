@@ -34,6 +34,8 @@
    * Use ChatGPT for generating testcases
    * Use auto-complete tool for coding
 
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -194,8 +196,8 @@ The sequence diagram below shows how a filter command is parsed and executed:
 * rejects malformed commands such as unsupported prefixes, repeated single-value prefixes, empty values, or invalid
   dates
 * constructs a list of predicates, one for each supplied criterion
-* wraps those predicates in `ApplicationMatchesAllPredicate`, so any application must satisfy every supplied filter
-  condition to remain visible
+* wraps those predicates in `ApplicationMatchesAllPredicate`, so any applications that satisfy atleast one of the supplied filter
+  condition would remain visible
 
 When the resulting `FilterCommand` executes, it calls `Model#updateFilteredApplicationList(predicate)`. In
 `ModelManager`, this updates the `FilteredList<Application>` that backs the UI. As a result:
@@ -251,7 +253,7 @@ Additional changes to UI styling may be performed in `ApplicationCard` without m
 
 ### Folder feature
 
-The `folder` command creates a new empty address book saved as a JSON file under the `data/` directory and immediately switches to it.
+The `folder` command creates a new empty OfferFlow folder saved as a JSON file under the `data/` directory and immediately switches to it.
 
 The sequence diagram below shows how a folder command is parsed and executed:
 
@@ -277,7 +279,7 @@ Unlike most commands, `FolderCommand#execute(model)` does not perform the actual
 
 ### Toggle feature
 
-The `toggle` command switches the active address book to an existing folder under the `data/` directory.
+The `toggle` command switches the active OfferFlow folder to an existing folder under the `data/` directory.
 
 The sequence diagram below shows how a toggle command is parsed and executed:
 
@@ -324,7 +326,7 @@ the value of a variable which will be saved to disk via `preferences.json` upon 
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+#### Proposed Future Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -431,7 +433,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* Has a need to manage a significant number internship applications
+* Has a need to manage a significant number of internship applications
 * Applies to many companies simultaneously and needs to track different application stages
 * Prefers desktop apps over other types
 * Can type fast and prefers typing over mouse interactions
@@ -440,7 +442,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Needs to track deadlines, interviews, and follow-ups
 * Values fast and efficient workflows with minimal steps
 
-**Value proposition**: help students manage and track all their internship/job applications all under one application
+**Value proposition**: The app helps students keep track of all their internship applications in one app without having to use multiple different applications like spreadsheet or calendar
 
 
 ### User stories
@@ -681,7 +683,7 @@ but can also choose to add other optional details (date of application, contact 
 **MSS**
 
 1. User requests to create a new folder with a given name.
-2. OfferFlow creates a new empty address book under the given folder name and switches to it.
+2. OfferFlow creates a new empty OfferFlow folder under the given folder name and switches to it.
 3. OfferFlow confirms the creation and displays the active folder.
 
    Use case ends.
@@ -712,7 +714,7 @@ but can also choose to add other optional details (date of application, contact 
 **MSS**
 
 1. User requests to switch to an existing folder with a given name.
-2. OfferFlow loads the address book from the folder and switches to it.
+2. OfferFlow loads the OfferFlow folder and switches to it.
 3. OfferFlow displays the loaded applications.
 
    Use case ends.
@@ -782,30 +784,26 @@ The extensions are similar to Use case: Filter applications.
 12. The program should save its current state after every execution of a user command.
 13. The program should be able to revert to a limited number of previous states when a user undo.
 14. The system should handle invalid commands gracefully and inform the user of the correct command format
-15. When an error occurs, the system should remain in or return to the last valid state without crashing
-16. The program should handle errors gracefully without crashing
-17. The program should explicitly inform the user of the reasons for errors.
-18. The program should remain or return to its latest correct state when an error occurs
-19. The program code should follow the coding standards of cs2103.
-20. The application should run on both Windows and macOS environments.
+15. The program should handle errors gracefully without crashing
+16. The program should explicitly inform the user of the reasons for errors.
+17. The program should remain or return to its latest correct state when an error occurs
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Application**: A job or internship application submitted by the user to a company.
-* **Duplicate**:  A repeated Application with the same <Company_Name> and <Job_Role>.
-* **Contact**: A record containing information about a company or recruiter, including name, role, and company.
-* **Application Status**:  The current stage of a job application (e.g., Plan to Apply, Applied, Interview, Pending, Rejected, Offered).
+* **Duplicate**:  A repeated Application with the same <Company_Name> and <Job_Role>
+* **Overwrite**: Replace an existing duplicate application it a new application
+* **Application**: A record containing information about a company or recruiter, including name, role, and company etc.
+* **Application Status**:  The current stage of a job application (e.g. Applied, Interview, Pending, Rejected, Offered).
 * **Reminder**: An Event created by user, containing the Event description and date of event.
 * **Notification**:  A reminder sent by OfferFlow to alert the user about upcoming deadlines or interview dates.
 * **Folder**:  A storage group that allows users to archive past job search sessions.
-* **Interaction**:   Any recorded communication or follow-up with a recruiter or company (e.g., email reply or interview invitation).
-* **Sample Data**:   Preloaded example entries that allow new users to explore the app before adding their own information.
-* **Cache / Archive**:  A way to store old job search records so that users can start a new job search while keeping historical data.
-* **Filtering**:  A feature that allows users to view applications based on certain attributes such as company name or deadline.
+* **Toggle**: The action of switching from one folder to another
+* **Sample Data**:   Preloaded example entries that allow new users to explore the app before adding their own information
+* **Pending**: Waiting for application outcome
+* **Cache / Archive**:  A way to store old job search records so that users can start a new job search while keeping historical data
+* **Filtering**:  A feature that allows users to view applications based on certain attributes such as company name or role
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1070,7 +1068,7 @@ Team size: 5
 
 6. **Filtering multliple of the same field is disabled**: Currently users cannot filter for multiple keywords from the same field/prefix (eg:`filter n/google n/meta r/backend` fails as cannot filter by more than 1 company name). We plan to allow users to filter multiple keywords of the same prefix/field
 
-7. **Limited naming for folder**: In the future we will allow more variation of folder naming like "!, +, -, *"
+7. **Limited naming for folder**: In the future we will allow more variation of folder naming like "!, +, /, *"
 
 8. **Overwrite discards stored application**: Currently, if user keys in any other commands other than overwrite, the duplicate stored application gets discarded. Plan to prolong the storage so that user can overwrite whenever they want.
 
@@ -1078,13 +1076,14 @@ Team size: 5
 
 ## **Appendix: Effort**
 
-Difficulty: moderate, Effort: moderate
+Difficulty: moderate, Effort: moderate <br>
 The AB3’s person constructor had a fixed number of fields and all the fields had to be provided. However, in our app we wanted to allow more fields like reminders, role, date of application and status to make it more appropriate for our context of internship application so it required major changes/updates in some of the existing files including test cases which proved to be a bit time-consuming to refactor.
 
-Difficulty: moderate, Effort: High
+Difficulty: moderate, Effort: High <br>
 In AB3, creating a personal contact requires a fixed set of parameters. To provide greater flexibility, we modified this behavior so that most fields are optional, allowing users to create an application without having to input every parameter. To support this change, we updated the existing add command logic in AB3 to handle optional fields and manage null values appropriately.Defensive programming techniques and assertions are used to detect and prevent null pointer exceptions, particularly in application creation, editing commands and even loading of addressbook storage files.
 
-AB3 by default cannot have duplicate contact details since it was an address book but our app can have duplicate details since each entry would be applications as it is common for students to apply to the same companies for different job positions. Hence, we had to decide on a way to find duplicate applications and finally we chose to not allow applications of the same name and role as students usually do not apply to the same job position in the same company multiple times simultaneously.
+Design decision: <br>
+AB3 by default cannot have duplicate contact details since it was an address book but our app can have duplicate details since each entry would be applications as it is common for students to apply to the same companies for different job positions. Hence, we had to decide on a way to find duplicate applications and finally, we chose to not allow applications of the same name and role as students usually do not apply to the same job position in the same company multiple times.
 
-Difficulty: moderate to high
+Difficulty: moderate to high <br>
 One challenge faced was maintaining consistency across multiple components (Model, Logic, UI) when introducing new features. For example, implementing filtering required integration with the model’s filtered list, while ensuring that UI updates remained responsive and accurate. As the number of features increased, preserving modularity and avoiding tightly coupled code became increasingly important. Overall, the project required a moderate-to-high level of effort due to the need to extend a pre-existing architecture while maintaining code quality, scalability, and robustness.

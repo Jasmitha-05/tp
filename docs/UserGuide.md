@@ -49,7 +49,7 @@ their internship pipeline faster than traditional GUI-based tools.
    * `add n/Google p/96789012 e/google@gmail.com a/70 Pasir Panjang Rd, #03-71 d/2024-06-18 r/Backend Developer s/interview t/java` : Adds your internship application to Offerflow.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all applications.
-   * `exit` : Exits the app.
+   * `exit` : Exits the app. <br>
 
 6. Type the `clear` command to clear all the sample data and start adding your own applications that you wish to track!
 
@@ -108,7 +108,6 @@ Format: `add n/NAME r/ROLE ...`
 
 **Tip:**
 * Application can be added with only the `n/NAME` and `r/ROLE` fields, other fields are optional
-* Application parameters (except name and role) can be removed by leaving the value after the prefix empty
 
 </box>
 
@@ -118,11 +117,11 @@ Format: `add n/NAME r/ROLE ...`
 * name and role is case insensitive
 * name does not allow some special character like /
 * Emails should be of the format `local-part@domain`
-* If applied dates (`d/DATE`) must use `YYYY-MM-DD` and cannot be a future date
+* If you choose to add applied date (`d/DATE`), you must use `YYYY-MM-DD` and it cannot be a future date
 * Reminder can only be added if both reminder name (`u/`) and reminder date (`ud/`) is provided
 * Reminder due today or earlier will be displayed in red, others will be displayed in orange
-* Multiple tags allowed
-* Default status is `Interested`
+* Multiple tags are allowed
+* Default status is `Interested` if none are specified
 * Blank parameters are stored as empty strings during the session; reloading the app resets them back to `None`
 
 </box>
@@ -145,7 +144,7 @@ Format: `add n/NAME r/ROLE ...`
 Overwrites pre-existing application in OfferFlow that has the same name and role, with the new application when you try to add an application with the same name and role as another already existing application
 
 #### Example:
-* `add n/Google r/QA Engineer d/2025-12-12 s/ `
+* `add n/Google r/QA Engineer d/2025-12-12`
 
   <img src="images/DuplicateApplication.png" width="500" height="400"/>
 
@@ -176,26 +175,37 @@ Format:
 **⚠️ Note:**
 * Enters editing mode for the application at the specified `INDEX` or with the specified `NAME` and `ROLE`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, …
 * Once editing mode is entered, *all commands* except for *editexit* and *editing commands* will be disabled.
-* Edit the application in edit mode by typing in at least one of the optional fields.
+* Edit the application in edit mode by typing in at least one of the fields.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the application will be removed i.e adding of tags is not cumulative.
 * You can remove all the application’s tags by typing `t/` without
   specifying any tags after it.
+
+<box type="warning" seamless>
+
+**Caution:** If you try to edit the name and role of an application to the same name and role as another existing application that would not be allowed
+
+</box>
 
 </box>
 
 <box type="tip" seamless>
 
 **Tip:**
-* you can remove and add tags add the same time by typing `t/` to remove the tag and `t/TAG` to specific any tag you want to add
-* you can remove any optional fields by simply typing the prefix without any parameter (ie: typing `a/` removes the current address)
+* you can remove and add tags at the same time by typing `t/` to remove the tag and `t/TAG` to specific any tag you want to add
+* you can remove any fields except name, role, reminder by simply leaving the value after the prefix empty (ie: typing `a/` removes the current address)
 
 </box>
 
 #### Examples:
+Enter editing mode:
 * `editmode 1` or `editmode n/Google r/Software Engineer`
+
+Edit in editing mode:
 * `a/Mapletree Business City II, Pasir Panjang area t/java`
 * `d/2025-12-11`
+
+Exit editing mode:
 * `editexit`
 
 #### Expected outcome:
@@ -204,7 +214,7 @@ Format:
 
 ### Modifying Reminders: `Reminder`
 
-Use `editmode` command to modify or create new Reminders.
+You can use `editmode` command to modify or create new Reminders to existing application.
 
 Format: `u/DESCRIPTION ud/DATE`
 
@@ -227,7 +237,7 @@ Format: `u/DESCRIPTION ud/DATE`
 
 * Creates a new upcoming interview Reminder on 12 December 2026.
 
-Use `rmr` command **outside** of `editmode` to remove Reminder of specified Application.
+You can use the `rmr` command **outside** of `editmode` to remove Reminder of a specific Application.
 
 Format: `rmr INDEX` or `rmr n/NAME r/ROLE`
 
@@ -236,6 +246,7 @@ Format: `rmr INDEX` or `rmr n/NAME r/ROLE`
 **⚠️ Note:**
 * `INDEX`: Application index reflected on list.
 * `n/NAME r/ROLE`: represents an Application to `NAME` for `ROLE`.
+* Reminders due today or in the past would be displayed in red, while others will be in orange
 
 </box>
 
@@ -249,7 +260,7 @@ Format: `rmr INDEX` or `rmr n/NAME r/ROLE`
 
 Updates the status of an **existing** application.
 
-Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
+Format: `status n/NAME r/ROLE s/STATUS`
 
 <box type="tip" seamless>
 
@@ -260,7 +271,7 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 <box type="info" seamless>
 
 **⚠️ Note:**
-* Application with the name and role must exist in order to update status
+* Application with the name and role must exist in the shown list in order to update status
 * Status to change to must be a valid status (see below)
 * Default status is `Interested` if no status provided
   (eg: `status n/google r/software engineer s/` changes the application status to `Interested`)
@@ -300,7 +311,7 @@ Format: `status n/COMPANY_NAME r/JOB_ROLE s/STATUS`
 
 ### Locating applications by the company name: `find`
 
-Helps you finds applications whose company names contain any of the given keywords.
+Helps you find applications whose company names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -336,12 +347,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Format: `list`
 
 #### Expected Outcome:
-Shows a list of all the applications you have added into OfferFlow
+Shows you a list of all the applications you have added into OfferFlow
 
 ### Locating applications with upcoming deadlines: `upcoming`
 
 Helps you find applications with upcoming reminders. Moreover, OfferFlow automatically
-filters for applications with reminders due within one week on start-up.
+filters for applications with reminders due within one week on start-up or based on the `DAYS` specified by the upcoming `DAYS` command.
 
 Format: `upcoming DAYS`
 
@@ -350,7 +361,7 @@ Format: `upcoming DAYS`
 **⚠️ Note:**
 * Applications with no reminders at all will not be returned.
 * Applications with reminders that are overdue (e.g due prior to the current date) will not be returned.
-* `DAYS` is an integer from 0 to 31 inclusive
+* `DAYS` is an integer from 0 to 31 inclusive to allow filtering possibly up to a month
 
 </box>
 
@@ -363,7 +374,7 @@ Format: `upcoming DAYS`
 
 ### Filtering applications: `filter`
 
-Filters applications by company, applied date, role, status, and/or tag. Allows filtering of multiple fields.
+You can filters applications by company, applied date, role, status, and/or tag. Allows filtering of multiple fields.
 
 Format:
 * `filter n/NAME`
@@ -378,7 +389,8 @@ Format:
 * Filter matching is case-insensitive.
 * Leading and trailing spaces are ignored.
 * Internal spacing still matters.
-* Applied dates must use `YYYY-MM-DD`.
+* Applied date must use `YYYY-MM-DD`.
+* Shows a filtered list with applications that satisfy any of the filtering conditions.
 
 </box>
 
@@ -396,7 +408,7 @@ Examples:
 
 ### Deleting an application : `delete`
 
-Delete an application in OfferFlow via index or reference via Company name and Role.
+You can delete an application in OfferFlow via index or reference via Company name and Role.
 
 Format: `delete INDEX` or `delete n/NAME r/ROLE`
 
@@ -418,7 +430,7 @@ application for Google as QA engineer
 
 ### Creating a new OfferFlow folder : `folder`
 
-Creates a new empty OfferFlow folder saved under `data/FOLDER_NAME.json` and switches to it.
+Helps you create a new empty OfferFlow folder saved under `data/FOLDER_NAME.json` and switches to it.
 
 Format: `folder FOLDER_NAME`
 
@@ -498,7 +510,7 @@ Format: `folders`
 <box type="warning" seamless>
 
 **Caution:**
-* ⚠️ Removes **ALL** applications. Use with caution.
+* ⚠️ Removes **ALL** applications and cannot be undone. Use with caution.
 </box>
 
 You can delete all applications on OfferFlow with just 1 command hassle-free!
@@ -541,6 +553,9 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OfferFlow home folder.
 
+**Q**: Why did my data disappear?<br>
+**A**: If you tried to manually change the data in the json file found under `/data` to an invalid value, OfferFlow discarded the all the stored applications in the file when you re-open the file in the app.
+
 ---
 
 ## Known issues
@@ -564,6 +579,7 @@ Furthermore, certain edits can cause OfferFlow to behave in unexpected ways (e.g
 | **Status**          | `status n/COMPANY r/ROLE s/STATUS`                                                                 | `status n/Tiktok r/Data Analyst s/Rejected`                                                                                      |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find Meta Amazon`                                                                                                                |
 | **Filter**          | `filter n/NAME` or `filter r/ROLE` or `filter d/YYYY-MM-DD` or `filter s/STATUS` or `filter t/TAG` | `filter n/Tiktok` or `filter r/Software Engineer` or `filter d/2024-06-18` or `filter s/Rejected t/java`                         |
+| **Upcoming**            | `upcoming DAYS`                                                                     | `upcoming 7`                                                                                                                |
 | **Folder**          | `folder FOLDER_NAME`                                                                               | `folder Y1S2`                                                                                                                    |
 | **Toggle**          | `toggle FOLDER_NAME`                                                                               | `toggle Y1S2`                                                                                                                    |
 | **List Folders**    | `folders`                                                                                          | `folders`                                                                                                                        |
